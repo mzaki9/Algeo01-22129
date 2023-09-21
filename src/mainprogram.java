@@ -8,7 +8,7 @@ public class mainprogram {
         
         //Scanner utama buat main
         Scanner scanner = new Scanner(System.in);
-        double[][] matrix = InputMatriks.inputMatriksKeyboard(scanner);
+        double[][] matrix = InputMatriks.inputFileMatriks(scanner);
         OutputMatriks.tulisMatriks(matrix);
     }
     

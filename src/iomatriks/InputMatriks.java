@@ -46,60 +46,67 @@ public class InputMatriks {
         return matrix;
     }
 
-    public static double[][] inputFileMatriks(String filename, Scanner scanner) {
+    /*  Revisi2 - Ngefix looping kalau file gk ada, suruh input ulang bukan malah quit program
+     * Fungsi yang didelete  - inputNamaFileMatriks ->dipindah ke dalam inputFileMatriks biar lebih efisien
+    */
+    public static double[][] inputFileMatriks( Scanner scanner) {
         double[][] matrix = null;
-        String filePath = "../test/" + filename + ".txt";
+        String filePath;
+        do
+        {
+            try 
+            {
 
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(filePath));
-            String line;
-            int RowEff = 0;
-            int ColEff = 0;
-            // Dapetin jumlah RowEff dan ColEff dari file txt
-            while ((line = reader.readLine()) != null) {
-                // RowEff + 1 tiap dibaca line baru
-                RowEff++;
+                //Input nama file txt
+                System.out.print("masukkan nama file txt:  ");
+                String filename = scanner.nextLine();
+                filePath = "../test/" + filename + ".txt";
+                BufferedReader reader = new BufferedReader(new FileReader(filePath));
 
-                String[] elements = line.split(" ");
-                // Panjang array elements menunjukkan banyaknya column
-                ColEff = elements.length;
+                String line;
+                int RowEff = 0;
+                int ColEff = 0;
+                // Dapetin jumlah RowEff dan ColEff dari file txt
+                while ((line = reader.readLine()) != null) {
+                    // RowEff + 1 tiap dibaca line baru
+                    RowEff++;
 
-            }
+                    String[] elements = line.split(" ");
+                    // Panjang array elements menunjukkan banyaknya column
+                    ColEff = elements.length;
 
-            matrix = new double[RowEff][ColEff];
-            reader.close();
-            // isi ulang
-            int i = 0;
-            reader = new BufferedReader(new FileReader(filePath));
-            while ((line = reader.readLine()) != null) {
-                String[] elements = line.split(" ");
-                for (int j = 0; j < elements.length; j++) {
-                    matrix[i][j] = Double.parseDouble(elements[j]);
                 }
-                i++;
+
+                matrix = new double[RowEff][ColEff];
+                reader.close();
+                // isi ulang
+                int i = 0;
+                reader = new BufferedReader(new FileReader(filePath));
+                while ((line = reader.readLine()) != null) {
+                    String[] elements = line.split(" ");
+                    for (int j = 0; j < elements.length; j++) {
+                        matrix[i][j] = Double.parseDouble(elements[j]); //Konversi dari elemen string menjadi double
+                    }
+                    i++;
+                }
+
+                reader.close();
+
+            } catch (IOException e) {
+                
+                System.out.println("========================================================");
+                System.out.println("ERROR! File tidak ditemukan, silahkan input ulang!");
+                System.out.println("========================================================");
+                filePath = null;
+
             }
-
-            reader.close();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("========================================================");
-            System.out.println("ERROR! File tidak ditemukan, keluar program! (for now)");
-            System.out.println("========================================================");
-
-        }
+        }while(filePath == null);
 
         return matrix;
 
     }
 
 
-    public static double[][] inputNamaFileMatriks(Scanner scanner) {
-
-        System.out.print("masukkan nama file txt:  ");
-        String namafile = scanner.nextLine();
-
-        return inputFileMatriks(namafile, scanner);
-    }
+    
 
 }
