@@ -7,7 +7,7 @@ import matrix.*;
 
 public class InputMatrix {
    
-
+    //tes
     public static Matrix inputMatrixKeyboard(Scanner scanner) {
         int row,col;
         row = 0;
