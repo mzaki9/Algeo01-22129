@@ -1,17 +1,17 @@
-package iomatriks;
+package iomatrix;
 
 import java.io.*;
 import java.util.Scanner;
 
-public class InputMatriks {
+import matrix.*;
 
-    public static double[][] inputMatriksKeyboard(Scanner scanner) {
-        double[][] matrix = null;
-        int row, col;
+public class InputMatrix {
+   
 
+    public static Matrix inputMatrixKeyboard(Scanner scanner) {
+        int row,col;
         row = 0;
         col = 0;
-
         
         // Input Jumlah Kolom dan baris
         System.out.println("Masukkan jumlah baris: ");
@@ -32,14 +32,14 @@ public class InputMatriks {
             col = scanner.nextInt();
         }
 
-        matrix = new double[row][col];
+        Matrix matrix = new Matrix(row, col);
 
         // Input elemen pada matrix
         System.out.println("Masukkan elemen pada matriks: ");
         for (int i = 0; i < row; i++) {
             {
                 for (int j = 0; j < col; j++) {
-                    matrix[i][j] = scanner.nextDouble();
+                    matrix.Matrix[i][j] = scanner.nextDouble();
                 }
             }
         }
@@ -49,14 +49,13 @@ public class InputMatriks {
     /*  Revisi2 - Ngefix looping kalau file gk ada, suruh input ulang bukan malah quit program
      * Fungsi yang didelete  - inputNamaFileMatriks ->dipindah ke dalam inputFileMatriks biar lebih efisien
     */
-    public static double[][] inputFileMatriks( Scanner scanner) {
-        double[][] matrix = null;
+    public static Matrix inputFileMatrix( Scanner scanner) {
         String filePath;
+        Matrix matrix = new Matrix(0,0);
         do
         {
             try 
             {
-
                 //Input nama file txt
                 System.out.print("masukkan nama file txt:  ");
                 String filename = scanner.nextLine();
@@ -77,15 +76,15 @@ public class InputMatriks {
 
                 }
 
-                matrix = new double[RowEff][ColEff];
+                matrix = new Matrix(RowEff, ColEff);
                 reader.close();
                 // isi ulang
                 int i = 0;
                 reader = new BufferedReader(new FileReader(filePath));
                 while ((line = reader.readLine()) != null) {
                     String[] elements = line.split(" ");
-                    for (int j = 0; j < elements.length; j++) {
-                        matrix[i][j] = Double.parseDouble(elements[j]); //Konversi dari elemen string menjadi double
+                    for (int j = 0; j < matrix.getColEff(); j++) {
+                        matrix.setElmt(i, j, Double.parseDouble(elements[j]));//Konversi dari elemen string menjadi double
                     }
                     i++;
                 }

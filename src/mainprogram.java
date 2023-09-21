@@ -1,6 +1,8 @@
 
 import java.util.Scanner;
-import iomatriks.*;
+
+import iomatrix.*;
+import matrix.*;
 
 public class mainprogram {
     public static void main(String[] args)
@@ -8,8 +10,8 @@ public class mainprogram {
         
         //Scanner utama buat main
         Scanner scanner = new Scanner(System.in);
-        double[][] matrix = InputMatriks.inputFileMatriks(scanner);
-        OutputMatriks.tulisMatriks(matrix);
+        Matrix matrix = InputMatrix.inputMatrixKeyboard(scanner);
+        OutputMatrix.tulisMatrix(matrix);
     }
     
 }
