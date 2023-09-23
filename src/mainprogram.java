@@ -15,7 +15,7 @@ public class mainprogram {
         OutputMatrix.tulisMatrix(matrix);
         SPL.createMatriksEselon(matrix);
         System.out.println("===============AKHIR===============");
-        OutputMatrix.tulisMatrix(matrix);
+        OutputMatrix.tulisMatrix(Tools.konversiFloattoDouble(matrix));
 
         //OutputMatrix.MatriksKeTXT(matrix);
 

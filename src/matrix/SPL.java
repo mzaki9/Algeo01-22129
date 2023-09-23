@@ -1,5 +1,4 @@
 package matrix;
-import java.text.DecimalFormat;
 
 import iomatrix.*;
 public class SPL {
@@ -18,12 +17,8 @@ public class SPL {
         {
             for (int i = k; i < m.getColEff(); i++) 
             {
-                //NANTI UNTUK KONVERSI INI AKAN DIBUAT FUNGSI PEMBANTU MISALNYA : doubleToString, stringToDouble, untuk sekarang seperti ini dulu
                 double increment = m.Matrix[row][i] / cons;
-                DecimalFormat df = new DecimalFormat("#.##");
-                String hasil = df.format(increment);
-                double nilaiBulat = Double.parseDouble(hasil);
-                m.Matrix[row][i] = nilaiBulat ;
+                m.Matrix[row][i] = increment ;
             }   
         }
         
@@ -61,21 +56,15 @@ public class SPL {
                 if((key1 > 0 && key2 < 0) || (key1 < 0 && key2 > 0))
                 {
 
-                    //NANTI UNTUK KONVERSI INI AKAN DIBUAT FUNGSI PEMBANTU MISALNYA : doubleToString, stringToDouble, untuk sekarang seperti ini dulu
                     double increment =(m.getElmt(i1, k) + (cons * m.getElmt(i2, k)));
-                    DecimalFormat df = new DecimalFormat("#.##");
-                    String hasil = df.format(increment);
-                    double nilaiBulat = Double.parseDouble(hasil);
-                    m.setElmt(i1, k, nilaiBulat);
+                    
+                    m.setElmt(i1, k, increment);
                 }
                 else
                 {
                     //NANTI UNTUK KONVERSI INI AKAN DIBUAT FUNGSI PEMBANTU MISALNYA : doubleToString, stringToDouble, untuk sekarang seperti ini dulu
                     double increment = (m.getElmt(i1, k) - (cons * m.getElmt(i2, k)));
-                    DecimalFormat df = new DecimalFormat("#.##");
-                    String hasil = df.format(increment);
-                    double nilaiBulat = Double.parseDouble(hasil);
-                    m.setElmt(i1, k, nilaiBulat);
+                    m.setElmt(i1, k, increment);
                 }
                 
             }
