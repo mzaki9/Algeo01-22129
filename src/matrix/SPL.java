@@ -80,14 +80,19 @@ public class SPL {
      */
     {
         int flag;
+        boolean cek = false;
         for (int i = 0; i < m.getRowEff(); i++) 
         {
             flag = 0;
-            for (int j = 0; j < m.getColEff(); j++) 
+            for (int j = m.getColEff() - 1; j >= 0 ; j--) 
             {
-                if(m.getElmt(i, j) == 0)
+                if(m.getElmt(i, j) == 0 && cek == false )
                 {
                     flag++;
+                }
+                else
+                {
+                    cek =true;
                 }
                 
             }
@@ -158,6 +163,19 @@ public class SPL {
             }
         }
     }
+    public static boolean cekBarisUnik(Matrix m, int row)
+    //mengembalikan nilai true apabila baris itu hasil unik / koefisien 1
+    {
+        int count = 0;
+        for (int j = 0; j < m.getColEff() - 1; j++) {
+            if(m.getElmt(row, j) == 0)
+            {
+                count ++;
+                
+            }
+        }
+        return (count == m.getColEff() - 2);
+    }
 
     public static Matrix createMatriksEselon( Matrix m)
     {
@@ -175,10 +193,16 @@ public class SPL {
         //Mulai algoritma Gauss
         for (int j = 0; j < batasAugmented ; j++) 
         {
-
+            
             for (i = 1 + j; i < m.getRowEff(); i++) 
             { 
-                OBEBarisPlusMinus(m, i, j,j);
+                if(cekBarisUnik(m,i) == false)
+                {
+                    
+                    OBEBarisPlusMinus(m, i, j,j);
+                }
+                
+                
             }
          
             if(cekNoSolution(m))
@@ -189,9 +213,11 @@ public class SPL {
             }
             if(k < m.getRowEff())
             {
+               
                 buat1Utama(m, k);
             }
             k++;
+            
         }
         //Kalau ada yang sama barisnya, dibuat 0 slaah satu, untuk mempermudah perhitungan nantinya
         delBarisSama(m);
