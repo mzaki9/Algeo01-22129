@@ -11,9 +11,13 @@ public class mainprogram {
         
         //Scanner utama buat main
         Scanner scanner = new Scanner(System.in);
-        Matrix matrix = InputMatrix.inputMatrixKeyboard(scanner);
+        Matrix matrix = InputMatrix.inputFileMatrix(scanner);
         OutputMatrix.tulisMatrix(matrix);
-        OutputMatrix.MatriksKeTXT(matrix);
+        SPL.createMatriksEselon(matrix);
+        System.out.println("===============AKHIR===============");
+        OutputMatrix.tulisMatrix(matrix);
+
+        //OutputMatrix.MatriksKeTXT(matrix);
 
     }
     

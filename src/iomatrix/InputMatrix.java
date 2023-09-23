@@ -2,7 +2,6 @@ package iomatrix;
 
 import java.io.*;
 import java.util.Scanner;
-
 import matrix.*;
 
 public class InputMatrix {
