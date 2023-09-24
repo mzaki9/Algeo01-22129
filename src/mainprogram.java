@@ -13,9 +13,10 @@ public class mainprogram {
         Scanner scanner = new Scanner(System.in);
         Matrix matrix = InputMatrix.inputFileMatrix(scanner);
         OutputMatrix.tulisMatrix(matrix);
-        SPL.createMatriksEselon(matrix);
+        Kofaktor.MatrixKofaktor(matrix);
         System.out.println("===============AKHIR===============");
         OutputMatrix.tulisMatrix(Tools.konversiFloattoDouble(matrix));
+        
 
         //OutputMatrix.MatriksKeTXT(matrix);
 
