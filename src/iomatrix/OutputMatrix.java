@@ -1,11 +1,7 @@
 package iomatrix;
 import java.io.*;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import javax.swing.JOptionPane;
 import matrix.Matrix;
-
-//tes
 
 public class OutputMatrix {
     public static void tulisMatrix(Matrix M) {
@@ -20,15 +16,14 @@ public class OutputMatrix {
         
     public static String dir = "../test";
     public static String path = "";
-    public static SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH.mm.ss");
+
     
 
     
     public static void createFile(){
         try{
             pathMaker();
-            Date date = new Date();
-            File file = new File(dir + formatter.format(date) + ".txt");
+            File file = new File(dir + "result.txt");
             if (!file.exists()){
                 file.createNewFile();
             }
@@ -61,18 +56,17 @@ public class OutputMatrix {
         String directory = System.getProperty("user.dir");
         directory = directory.substring(directory.lastIndexOf("\\")+1);
         if(directory.equals("bin")){
-            dir = "..\\test\\result\\";
+            dir = "..\\test\\";
         }
         else{
-            dir = "test\\result\\";
+            dir = "test\\";
         }
     }  
 
-    public static void MatriksKeTXT(Matrix M){
+    public static void TuliskeTxt(String s){
         try{
             createFile();
             FileWriter wr = new FileWriter(path);
-            String s = matrixToString(M);
             wr.write(s);
             wr.close();
             System.out.println("Sukses menulis file.");
@@ -83,6 +77,10 @@ public class OutputMatrix {
             JOptionPane.showMessageDialog(null,"Terjadi error. " ,"Error!", JOptionPane.ERROR_MESSAGE); 
         }
     }
+//test output ke file
+    // public static void main(String[] args){
+    //     TuliskeTxt("string");
+    // }
 }
     
 
