@@ -1,6 +1,5 @@
 package matrix;
 
-import iomatrix.*;
 public class SPL {
 
     public static void buat1Utama(Matrix m, int row)
@@ -223,6 +222,96 @@ public class SPL {
         delBarisSama(m);
         return m;
         
+    }
+
+    public static Matrix inverseMatrix(Matrix m) {
+        int n = m.getRowEff();
+
+
+        //TO-DO add pengecekan apakah matrix solveable
+
+        Matrix matrixTanpaB = new Matrix(n, n);
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                matrixTanpaB.setElmt(i, j, m.getElmt(i, j));
+            }
+        }
+
+        Matrix augmentedMatrix = new Matrix(n, n * 2);
+
+        // Buat Matrix dengan [Matrix asal | Matrix Identitas]
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                augmentedMatrix.setElmt(i, j, matrixTanpaB.getElmt(i, j));
+                // J+N agar membuat matrix identitas
+                // dan N agar membuat matrix identitas di sebelah kanan matrix
+                // asal agar tidak bertabarakan
+                if (i == j) {
+                    augmentedMatrix.setElmt(i, j + n, 1);
+                } else {
+                    augmentedMatrix.setElmt(i, j + n, 0);
+                }
+            }
+        }
+
+        // Start Gauss-Jordan :(
+        for (int i = 0; i < n; i++) {
+            // buat leading element menjadi 1
+            double key = augmentedMatrix.getElmt(i, i);
+            for (int j = 0; j < 2 * n; j++) {
+                //dibagi dengan key agar menjadi 1
+                //selanjutnya lakukan pada tiap kolom
+                augmentedMatrix.setElmt(i, j, augmentedMatrix.getElmt(i, j) / key);
+            }
+
+            // Membuat 0 elemen yang bukan diagonal
+            for (int k = 0; k < n; k++) {
+                //
+                if (k != i) {
+                    double factor = augmentedMatrix.getElmt(k, i);
+                    for (int j = 0; j < 2 * n; j++) {
+                        augmentedMatrix.setElmt(k, j,augmentedMatrix.getElmt(k, j) - factor * augmentedMatrix.getElmt(i, j));
+                    }
+                }
+            }
+        }
+
+        //Hanya mengambil sisi kiri dari matrix, yaitu hasil
+        //inversenya
+        Matrix inverseMatrix = new Matrix(n, n);
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                inverseMatrix.setElmt(i, j, augmentedMatrix.getElmt(i, j + n));
+            }
+        }
+
+        return inverseMatrix;
+    }
+
+    public static Matrix findX(Matrix m) {
+
+        // Deklarasi
+        Matrix hasil = new Matrix(m.getRowEff(), m.getRowEff());
+        Matrix b = new Matrix(m.getRowEff(), 1);
+        hasil = inverseMatrix(m);
+
+        // Ambil "b" dari matrix original
+        for (int i = 0; i < m.getRowEff(); i++) {
+            double bValue = m.getElmt(i, m.getColEff() - 1); 
+            b.setElmt(i, 0, bValue); 
+        }
+
+        Matrix x = new Matrix(hasil.getRowEff(), 1);
+
+        for (int i = 0; i < hasil.getRowEff(); i++) {
+            double sum = 0.0;
+            for (int j = 0; j < hasil.getColEff(); j++) {
+                sum += hasil.getElmt(i, j) * b.getElmt(j, 0);
+            }
+            x.setElmt(i, 0, sum);
+        }
+
+        return x;
     }
 
         

@@ -11,11 +11,8 @@ public class mainprogram {
         
         //Scanner utama buat main
         Scanner scanner = new Scanner(System.in);
-        Matrix matrix = InputMatrix.inputFileMatrix(scanner);
-        OutputMatrix.tulisMatrix(matrix);
-        Kofaktor.MatrixKofaktor(matrix);
-        System.out.println("===============AKHIR===============");
-        OutputMatrix.tulisMatrix(Tools.konversiFloattoDouble(matrix));
+        Matrix matrix = InputMatrix.inputMatrixKeyboard(scanner);
+        OutputMatrix.tulisMatrix(SPL.findX(matrix));
         
 
         //OutputMatrix.MatriksKeTXT(matrix);
