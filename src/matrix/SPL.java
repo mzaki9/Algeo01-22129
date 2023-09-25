@@ -237,58 +237,13 @@ public class SPL {
             }
         }
 
-        Matrix augmentedMatrix = new Matrix(n, n * 2);
+        Matrix hasil  = new Matrix(m.getRowEff(), m.getRowEff());
+        hasil = MatrixBalikan.GaussJordan(matrixTanpaB);
 
-        // Buat Matrix dengan [Matrix asal | Matrix Identitas]
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                augmentedMatrix.setElmt(i, j, matrixTanpaB.getElmt(i, j));
-                // J+N agar membuat matrix identitas
-                // dan N agar membuat matrix identitas di sebelah kanan matrix
-                // asal agar tidak bertabarakan
-                if (i == j) {
-                    augmentedMatrix.setElmt(i, j + n, 1);
-                } else {
-                    augmentedMatrix.setElmt(i, j + n, 0);
-                }
-            }
-        }
-
-        // Start Gauss-Jordan :(
-        for (int i = 0; i < n; i++) {
-            // buat leading element menjadi 1
-            double key = augmentedMatrix.getElmt(i, i);
-            for (int j = 0; j < 2 * n; j++) {
-                //dibagi dengan key agar menjadi 1
-                //selanjutnya lakukan pada tiap kolom
-                augmentedMatrix.setElmt(i, j, augmentedMatrix.getElmt(i, j) / key);
-            }
-
-            // Membuat 0 elemen yang bukan diagonal
-            for (int k = 0; k < n; k++) {
-                //
-                if (k != i) {
-                    double factor = augmentedMatrix.getElmt(k, i);
-                    for (int j = 0; j < 2 * n; j++) {
-                        augmentedMatrix.setElmt(k, j,augmentedMatrix.getElmt(k, j) - factor * augmentedMatrix.getElmt(i, j));
-                    }
-                }
-            }
-        }
-
-        //Hanya mengambil sisi kiri dari matrix, yaitu hasil
-        //inversenya
-        Matrix inverseMatrix = new Matrix(n, n);
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                inverseMatrix.setElmt(i, j, augmentedMatrix.getElmt(i, j + n));
-            }
-        }
-
-        return inverseMatrix;
+        return hasil;
     }
 
-    public static Matrix findX(Matrix m) {
+    public static Matrix solveX(Matrix m) {
 
         // Deklarasi
         Matrix hasil = new Matrix(m.getRowEff(), m.getRowEff());
@@ -303,6 +258,8 @@ public class SPL {
 
         Matrix x = new Matrix(hasil.getRowEff(), 1);
 
+
+        //X = hasil^-1 * b
         for (int i = 0; i < hasil.getRowEff(); i++) {
             double sum = 0.0;
             for (int j = 0; j < hasil.getColEff(); j++) {
