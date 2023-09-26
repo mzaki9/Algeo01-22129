@@ -18,5 +18,14 @@ public class Tools
         }
         return m;
     }
+
+    public static void copyMatrix(Matrix ref,Matrix dest){
+        //Prekondisi Ukuran matrix sama
+        for (int i = 0; i < ref.getRowEff(); i++) {
+            for (int j = 0; j < ref.getColEff(); j++) {
+                dest.setElmt(i, j, ref.getElmt(i, j));
+            }
+        }
+    }
     
 }
