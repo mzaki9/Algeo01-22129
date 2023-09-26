@@ -13,6 +13,13 @@ public class OutputMatrix {
         }
     }
 
+    public static void printSolution(Matrix x) {
+
+        System.out.println("Solusi Sistem Persamaan Linear:");
+        for (int i = 0; i < x.getRowEff(); i++) {
+            System.out.printf("x%d = %f\n", (i + 1), x.getElmt(i, 0));
+        }
+    }
         
     public static String dir = "../test";
     public static String path = "";
