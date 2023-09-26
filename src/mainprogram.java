@@ -11,7 +11,7 @@ public class mainprogram {
         
         //Scanner utama buat main
         Scanner scanner = new Scanner(System.in);
-        Matrix matrix = InputMatrix.inputFileMatrix(scanner);
+        Matrix matrix = InputMatrix.inputMatrixKeyboard(scanner);
         
         // SPL.Cramer(matrix);
         // SPL.inverseMatrix(matrix);
@@ -19,6 +19,7 @@ public class mainprogram {
         //TES GAUSSJORDAN
         SPL.createMatriksEselon(matrix);
         SPL.eliminasiGaussJordan(matrix);
+        
         OutputMatrix.tulisSolusiGaussJordan(SPL.solutionGaussJordan(matrix), matrix);
         OutputMatrix.tulisMatrix(Tools.konversiFloattoDouble(matrix));
         

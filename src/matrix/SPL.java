@@ -303,7 +303,7 @@ public class SPL {
                     {
                         if((-1) * m.getElmt(i, j) > 0)
                         {
-                            ans[j1utama] += Double.toString(m.getElmt(i, j)) + "R" + Integer.toString(j+1)+ "  " ;
+                            ans[j1utama] += Double.toString((-1)*m.getElmt(i, j)) + "R" + Integer.toString(j+1)+ "  " ;
                         }
                         else
                         {   
@@ -312,7 +312,7 @@ public class SPL {
                     }
                    
                     //Memasukkan nilai b di akhir persamaan 
-                    if (m.getElmt(i, batasAugmented) > 0  && cekb == false && j == batasAugmented - 1)
+                    if (m.getElmt(i, batasAugmented) > 0  && cekb == false && j == batasAugmented - 1) // j == batasaugmented - 1 agar penempatan si B di akhir persamaan.
                     {
                         if(ans[j1utama] != "")
                         {
