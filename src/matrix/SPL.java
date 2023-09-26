@@ -90,27 +90,23 @@ public class SPL {
     {
         int j;
         
-        if(!(cekSolusiBanyak(m)))
-        {
+        
             for (int i = 0; i < m.getRowEff(); i++) 
             {
+               
                 j = m.getColEff() - 2;
                 while (j >= 0 && m.getElmt(i, j) == 0)
                 {
                     j--;
                 }
-                if(j == -1)
+                if(j == -1 && m.getElmt(i, m.getColEff() - 1) != 0)
                 {
                     return true;
                 }
             }
             return false;
-        }
-        else
-        {
-            return false;
-        }
         
+       
     }
 
     public static boolean cekSolusiBanyak(Matrix m)

@@ -11,7 +11,7 @@ public class mainprogram {
         
         //Scanner utama buat main
         Scanner scanner = new Scanner(System.in);
-        Matrix matrix = InputMatrix.inputMatrixKeyboard(scanner);
+        Matrix matrix = InputMatrix.inputFileMatrix(scanner);
         
         // SPL.Cramer(matrix);
         // SPL.inverseMatrix(matrix);
