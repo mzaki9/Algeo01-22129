@@ -4,6 +4,8 @@ import java.text.DecimalFormat;
 public class Tools 
 {
     public static Matrix konversiFloattoDouble(Matrix m )
+    //Gunakan di akhir, saat ingin menunjukkan matriks, takutnya mengubah nilai float to double di tengah operasi, nanti jadi gak akurat hasilnya
+    //INGAT, kalau pake tulisMatriks trus konversi, nanti bisa bisa ke bulet terus, karena tulisMatriks itu prosedural, jadi lebih baik gunakan fungsi ini diakhir proses!!
     {
         for (int i = 0; i < m.getRowEff(); i++) {
             for (int j = 0; j < m.getColEff(); j++) {

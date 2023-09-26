@@ -2,6 +2,7 @@ package iomatrix;
 import java.io.*;
 import javax.swing.JOptionPane;
 import matrix.Matrix;
+import matrix.SPL;
 
 public class OutputMatrix {
     public static void tulisMatrix(Matrix M) {
@@ -10,6 +11,28 @@ public class OutputMatrix {
                 System.out.print(M.getElmt(i, j) + " ");
             }
             System.out.println();
+        }
+    }
+    public static void tulisSolusiGaussJordan(String[] ans,Matrix m)
+    {
+        if(SPL.cekNoSolution(m))
+        {
+            System.out.println("Tidak ada solusi!");
+        }
+        else
+        {
+            System.out.println("=============SOLUSI===============");
+            for (int i = 0; i < ans.length; i++) {
+                if(ans[i] != "")
+                {
+                    System.out.println("X" + (i+1) + " =" + " " + ans[i]);
+                }
+                else
+                {
+                    System.out.println("X" + (i+1) + " = " + "R" + (i+1));
+                }
+            }
+            System.out.println("===================================");
         }
     }
 
