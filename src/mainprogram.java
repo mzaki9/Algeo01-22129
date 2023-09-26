@@ -19,9 +19,8 @@ public class mainprogram {
         //TES GAUSSJORDAN
         SPL.createMatriksEselon(matrix);
         SPL.eliminasiGaussJordan(matrix);
-        OutputMatrix.tulisMatrix(Tools.konversiFloattoDouble(matrix));
         OutputMatrix.tulisSolusiGaussJordan(SPL.solutionGaussJordan(matrix), matrix);
-        
+        OutputMatrix.tulisMatrix(Tools.konversiFloattoDouble(matrix));
         
        
 

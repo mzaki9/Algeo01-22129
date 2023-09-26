@@ -89,18 +89,28 @@ public class SPL {
      */
     {
         int j;
-        j = m.getColEff() - 2;
-        for (int i = 0; i < m.getRowEff(); i++) 
+        
+        if(!(cekSolusiBanyak(m)))
         {
-            j = m.getColEff() - 2;
-            //mulai dari kolom bukan "b" dari kanan
-            while (j > 0 && m.getElmt(i, j) == 0) 
+            for (int i = 0; i < m.getRowEff(); i++) 
             {
-                j--;
+                j = m.getColEff() - 2;
+                while (j >= 0 && m.getElmt(i, j) == 0)
+                {
+                    j--;
+                }
+                if(j == -1)
+                {
+                    return true;
+                }
             }
-           
+            return false;
         }
-        return (j == 0);
+        else
+        {
+            return false;
+        }
+        
     }
 
     public static boolean cekSolusiBanyak(Matrix m)
@@ -286,25 +296,27 @@ public class SPL {
             for (int j = 0; j < batasAugmented; j++) {
                 
                 //apabila ditemukan 0 dan kolom j tidak sama dengan kolom j1utama, ATAU j1utama berada di akhir
-                if(j != j1utama && m.getElmt(i, j) != 0 || j1utama == batasAugmented - 1 && m.getElmt(i, j) != 0)
+                if(j != j1utama && m.getElmt(i, j) != 0 || cekBarisUnik(m, i) )
                 {
+                  
                     if(!(cekBarisUnik(m, i)))
                     {
                         if((-1) * m.getElmt(i, j) > 0)
                         {
-                            ans[j1utama] += Double.toString(m.getElmt(i, j)) + "R" + Integer.toString(j+1)+ " + " ;
+                            ans[j1utama] += Double.toString(m.getElmt(i, j)) + "R" + Integer.toString(j+1)+ "  " ;
                         }
                         else
                         {   
                             ans[j1utama] += "- " + Double.toString(m.getElmt(i, j)) + "R" + Integer.toString(j+1) + " ";
                         }
                     }
-                    //Memasukkan nilai b di akhir persamaan (pembulatan di atas 0,1.di bawah itu tidak ditulis)
+                   
+                    //Memasukkan nilai b di akhir persamaan 
                     if (m.getElmt(i, batasAugmented) > 0  && cekb == false && j == batasAugmented - 1)
                     {
                         if(ans[j1utama] != "")
                         {
-                            ans[j1utama] += " + ";
+                            ans[j1utama] += "+";
                         }
                         ans[j1utama] +=  Double.toString(m.getElmt(i, batasAugmented));
                         cekb = true;
@@ -313,7 +325,7 @@ public class SPL {
                     {
                         if(ans[j1utama] != "")
                         {
-                            ans[j1utama] += " - ";
+                            ans[j1utama] += "";
                         }
                         ans[j1utama] +=  Double.toString(m.getElmt(i, batasAugmented));
                         cekb = true;
