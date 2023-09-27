@@ -19,6 +19,62 @@ public class InputMatrix {
 
         return dataXY;
     }
+    public static void inputRegresiLinier(Scanner scanner)
+    // I.S Menerima scanner 
+    // F.S Mengembalikan matriks yang sudah diolah menjadi regresi 
+    {
+        System.out.print("Mau berapa banyak peubah(var x)? (n) : ");
+        int n = scanner.nextInt();
+        System.out.print("Mau ada berapa sampel?  (m): ");
+        int m = scanner.nextInt();
+        System.out.println("Matrix dengan " + (n+1) + " kolom ( banyaknya peubah : " + n  +" + 1 y di akhir d) " + "dan " + m + " baris telah dibuat");
+        System.out.println();
+        Matrix matriksRegresi = new Matrix(m, n+1);
+        System.out.println("input dengan format x1,x2,...xn,ym (diakhiri dengan nilai y pada sampel tersebut)");
+        for(int i = 0; i < matriksRegresi.getRowEff(); i++)
+        {
+            
+            System.out.println("Masukkan sampel ke - "+ (i+1) );
+            for(int j = 0; j < matriksRegresi.getColEff();j++)
+            {   
+                matriksRegresi.setElmt(i, j, scanner.nextDouble());
+            }
+        }
+        
+        
+        Matrix eEqualReg = new Matrix(matriksRegresi.getColEff(), matriksRegresi.getColEff() + 1);
+        Tools.copyMatrix(RegresiLinierBerganda.regresiGanda(matriksRegresi), eEqualReg);
+        eEqualReg.Matrix[0][0] = matriksRegresi.getRowEff();
+        OutputMatrix.tulisMatrix(eEqualReg);
+        SPL.createMatriksEselon(eEqualReg);
+        SPL.createEselonTereduksi(eEqualReg);
+        OutputMatrix.tulisMatrix(eEqualReg);
+        Float[] ansTab =  RegresiLinierBerganda.tulisSolusiRegresi(SPL.solutionGaussJordan(eEqualReg), eEqualReg);
+        System.out.println("Persamaan nya adalah : ");
+        System.out.print("y = " + ansTab[0]);
+        for (int i = 1; i < ansTab.length; i++) {
+            if (ansTab[i] > 0)
+            {
+                System.out.print(" + " );
+            } 
+            System.out.print(ansTab[i] + " x" + i + " ");
+            
+        }
+        System.out.println("\nHampirannya berapa? ada " + n +" buah x : ");
+        float hampy = 0;
+        hampy += ansTab[0];
+        for (int i = 1; i <= n; i++) {
+            
+            double x = scanner.nextDouble();
+            hampy += (x * ansTab[i]);
+        }
+        System.out.println("Dan Hampirannya adalah y =  " + hampy);
+
+
+
+
+
+    }
    
     //tes
     public static Matrix inputMatrixKeyboard(Scanner scanner) {

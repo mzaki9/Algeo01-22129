@@ -12,7 +12,7 @@ public class mainprogram {
         //Scanner utama buat main
         Scanner scanner = new Scanner(System.in);
         //Matrix matrix = InputMatrix.inputFileMatrix(scanner);
-        Matrix matrix = InputMatrix.inputMatrixKeyboard(scanner);
+        // Matrix matrix = InputMatrix.inputMatrixKeyboard(scanner);
 
         /*Input untuk interpolasi */
 
@@ -20,17 +20,22 @@ public class mainprogram {
         //matrix = InputMatrix.inputInterpolasi(scanner);
         //InterpolasiPolinomial.Interpolasi(matrix);
         
+        //TES REGRESI LINEAR BERGANDA
+        InputMatrix.inputRegresiLinier(scanner);
+       
+        
+
         //Menu Cramer
-        OutputMatrix.tulisSolusi(SPL.Cramer(matrix,false));
+        // OutputMatrix.tulisSolusi(SPL.Cramer(matrix,false));
 
         //SPL.inverseMatrix(matrix);
 
         //TES GAUSSJORDAN
-        //SPL.createMatriksEselon(matrix);
-        //SPL.eliminasiGaussJordan(matrix);
+        // SPL.createMatriksEselon(matrix);
+        // SPL.createEselonTereduksi(matrix);
         
-        //OutputMatrix.tulisSolusiGaussJordan(SPL.solutionGaussJordan(matrix), matrix);
-        //OutputMatrix.tulisMatrix(Tools.konversiFloattoDouble(matrix));
+        // OutputMatrix.tulisSolusiGaussJordan(SPL.solutionGaussJordan(matrix), matrix);
+        // OutputMatrix.tulisMatrix(matrix);
         
        
 

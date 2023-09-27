@@ -16,7 +16,7 @@ public class OutputMatrix {
     }
 
     public static void tulisSolusiGaussJordan(String[] ans, Matrix m) {
-        if (SPL.cekNoSolution(m)) {
+        if (SPL.cekNoSolution(m) || SPL.Same1Utama(m)) {
             System.out.println("Tidak ada solusi!");
         } else {
             System.out.println("=============SOLUSI===============");

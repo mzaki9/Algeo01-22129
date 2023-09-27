@@ -226,7 +226,7 @@ public class SPL {
         return (flag == m.getRowEff() - 1);
     }
 
-    public static void eliminasiGaussJordan(Matrix m) {
+    public static void createEselonTereduksi(Matrix m) {
         // Prekondisi : Harus di eselon baris dulu matrkisnya
         
         int k;
@@ -263,9 +263,12 @@ public class SPL {
                 }
 
             }
+
+            
             // udah nemu 1 utama
 
         }
+        
 
     }
     public static String[] solutionGaussJordan(Matrix m)
@@ -337,6 +340,26 @@ public class SPL {
             }
         }
         return ans; 
+    }
+    public static boolean Same1Utama(Matrix m)
+    {
+        //Mengembalikan nilai TRUE apabila ditemukan 1 utama yang lebih dari 1 dalam 1 kolom(berarti tidak ada solusi)
+        int sum1;
+        for (int i = 0; i < m.getColEff(); i++) {
+            sum1 = 0;
+            for (int j = 0; j < m.getRowEff(); j++) {
+                if(m.getElmt(j, i) == 1)
+                {
+                    sum1 ++;
+                }
+
+            }   
+            if(sum1 != 1 )
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static void inverseMatrix(Matrix m) {
