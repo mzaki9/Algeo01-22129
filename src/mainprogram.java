@@ -12,13 +12,17 @@ public class mainprogram {
         //Scanner utama buat main
         Scanner scanner = new Scanner(System.in);
         //Matrix matrix = InputMatrix.inputFileMatrix(scanner);
-        //Matrix matrix = InputMatrix.inputMatrixKeyboard(scanner);
+        Matrix matrix = InputMatrix.inputMatrixKeyboard(scanner);
 
         /*Input untuk interpolasi */
-        Matrix matrix = InputMatrix.inputInterpolasi(scanner);
-        InterpolasiPolinomial.Interpolasi(matrix);
+
+        //Menu Interpolasi
+        //matrix = InputMatrix.inputInterpolasi(scanner);
+        //InterpolasiPolinomial.Interpolasi(matrix);
         
-        // SPL.Cramer(matrix);
+        //Menu Cramer
+        OutputMatrix.tulisSolusi(SPL.Cramer(matrix,false));
+
         //SPL.inverseMatrix(matrix);
 
         //TES GAUSSJORDAN
