@@ -365,12 +365,12 @@ public class SPL {
             x.setElmt(i, 0, sum);
         }
         
-        OutputMatrix.printSolution(x);;
+        OutputMatrix.tulisSolusi(x);;
     }
 
     
 
-    public static void Cramer(Matrix m) {
+    public static Matrix Cramer(Matrix m,Boolean isInterpolasi) {
 
         Matrix matrix = new Matrix(m.getRowEff(), m.getRowEff());
         Matrix x = new Matrix(m.getRowEff(), 1); //matrix ini dibuat untuk menyimpan hasil x
@@ -381,10 +381,12 @@ public class SPL {
 
         double determinan = Kofaktor.hitungDeterminan(matrix);
 
-        if (determinan == 0) {
+        if (isInterpolasi){
+            if (determinan == 0) {
             System.out.println("Determinan matriks adalah nol, tidak ada solusi atau solusi tidak unik.");
-            return;
+         }
         }
+        
         
         // Mulai Cramer
         for (int i = 0; i < matrix.getColEff(); i++) {
@@ -395,7 +397,8 @@ public class SPL {
             x.setElmt(i, 0, Kofaktor.hitungDeterminan(temp) / determinan);
         }
 
-        OutputMatrix.printSolution(x);
+        return x;
+        //OutputMatrix.printSolution(x);
     }
 
     public static Matrix matrixWithoutB(Matrix m) {

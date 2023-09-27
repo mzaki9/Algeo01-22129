@@ -9,8 +9,7 @@ public class InterpolasiPolinomial {
     public static void Interpolasi(Matrix m) {
         Matrix augMatrix = createAugmentedMatrix(m);
         //OutputMatrix.tulisMatrix(augMatrix);
-        SPL.Cramer(augMatrix);
- 
+        OutputMatrix.tulisSolusiInterpolasiP(SPL.Cramer(augMatrix,true));    
     }
 
     public static Matrix createAugmentedMatrix(Matrix dataXY) {
