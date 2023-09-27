@@ -5,6 +5,20 @@ import java.util.Scanner;
 import matrix.*;
 
 public class InputMatrix {
+    
+    public static Matrix inputInterpolasi(Scanner scanner){
+        System.out.print("Masukkan derajat interpolasi: ");
+        int derajat = scanner.nextInt();
+        Matrix dataXY = new Matrix(derajat + 1, 2);
+
+        for(int i = 0; i <= derajat; i++){
+            for(int j = 0; j < 2;j++){
+                dataXY.setElmt(i, j, scanner.nextDouble());
+            }
+        }
+
+        return dataXY;
+    }
    
     //tes
     public static Matrix inputMatrixKeyboard(Scanner scanner) {
@@ -104,6 +118,7 @@ public class InputMatrix {
 
     }
 
+    
 
     
 
