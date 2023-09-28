@@ -344,23 +344,27 @@ public class SPL {
     public static boolean Same1Utama(Matrix m)
     {
         //Mengembalikan nilai TRUE apabila ditemukan 1 utama yang lebih dari 1 dalam 1 kolom(berarti tidak ada solusi)
-        int sum1;
-        for (int i = 0; i < m.getColEff(); i++) {
-            sum1 = 0;
-            for (int j = 0; j < m.getRowEff(); j++) {
-                if(m.getElmt(j, i) == 1)
+        
+        boolean cek;
+        for (int j = 0; j < m.getColEff() - 1; j++) {
+            
+            cek = false;
+            for (int i = 0; i < m.getRowEff(); i++) {
+                //cek 1 utama
+                if (m.getElmt(i, j) == 1 && cek == false)
                 {
-                    sum1 ++;
+                    cek = true;
                 }
-
-            }   
-            if(sum1 != 1 )
-            {
-                return true;
+                else if(m.getElmt(i, j) == 1 && cek == true)
+                {
+                    return true;
+                }
             }
         }
         return false;
+       
     }
+
 
     public static void inverseMatrix(Matrix m) {
         int n = m.getRowEff();

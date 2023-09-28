@@ -24,7 +24,7 @@ public class OutputMatrix {
                 if (ans[i] != "") {
                     System.out.println("X" + (i + 1) + " =" + " " + ans[i]);
                 } else {
-                    System.out.println("X" + (i + 1) + " = " + "R" + (i + 1));
+                    System.out.println("X" + (i + 1) + " = " + "R" + (i + 1) + " - isi bebas ");
                 }
             }
             System.out.println("===================================");
