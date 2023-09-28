@@ -2,6 +2,7 @@ package matrix;
 
 import iomatrix.OutputMatrix;
 
+//TES
 public class BicubicSpline {
 
     public static void fungsif(int bariskoef,Matrix  koef)

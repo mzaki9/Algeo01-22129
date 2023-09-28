@@ -24,7 +24,7 @@ public class MatrixBalikan {
         // Start Gauss-Jordan :(
         for (int i = 0; i < m.getRowEff(); i++) {
             if (augmentedMatrix.getElmt(i, i) == 0) {
-                // Find a row below with a non-zero element in the same column
+
                 int swapRow = -1;
                 for (int k = i + 1; k < m.getRowEff(); k++) {
                     if (augmentedMatrix.getElmt(k, i) != 0) {
@@ -32,21 +32,18 @@ public class MatrixBalikan {
                         break;
                     }
                 }
-    
-                // If a suitable row is found, swap them
+
                 if (swapRow != -1) {
                     SPL.swapBaris(augmentedMatrix, i, swapRow);
-                    //augmentedMatrix.swapRows(i, swapRow);
+
                 } else {
-                    // Handle the case where no suitable row is found
-                    throw new ArithmeticException("Matrix is not invertible");
+
+                    throw new ArithmeticException("Matrix tidak mempunyai balikan");
                 }
             }
-            // buat leading element menjadi 1
             double key = augmentedMatrix.getElmt(i, i);
             for (int j = 0; j < 2 * m.getRowEff(); j++) {
-                // dibagi dengan key agar menjadi 1
-                // selanjutnya lakukan pada tiap kolom
+
                 augmentedMatrix.setElmt(i, j, augmentedMatrix.getElmt(i, j) / key);
             }
 
@@ -73,6 +70,4 @@ public class MatrixBalikan {
         return inverseMatrix;
     }
 
-
-    
 }

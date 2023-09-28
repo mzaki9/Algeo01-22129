@@ -23,6 +23,7 @@ public class mainprogram {
         //TES REGRESI LINEAR BERGANDA
         // InputMatrix.inputRegresiLinier(scanner);
        
+        //BICUBIC
         BicubicSpline.koeff();
 
         //Menu Cramer
