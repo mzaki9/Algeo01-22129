@@ -23,6 +23,25 @@ public class MatrixBalikan {
 
         // Start Gauss-Jordan :(
         for (int i = 0; i < m.getRowEff(); i++) {
+            if (augmentedMatrix.getElmt(i, i) == 0) {
+                // Find a row below with a non-zero element in the same column
+                int swapRow = -1;
+                for (int k = i + 1; k < m.getRowEff(); k++) {
+                    if (augmentedMatrix.getElmt(k, i) != 0) {
+                        swapRow = k;
+                        break;
+                    }
+                }
+    
+                // If a suitable row is found, swap them
+                if (swapRow != -1) {
+                    SPL.swapBaris(augmentedMatrix, i, swapRow);
+                    //augmentedMatrix.swapRows(i, swapRow);
+                } else {
+                    // Handle the case where no suitable row is found
+                    throw new ArithmeticException("Matrix is not invertible");
+                }
+            }
             // buat leading element menjadi 1
             double key = augmentedMatrix.getElmt(i, i);
             for (int j = 0; j < 2 * m.getRowEff(); j++) {

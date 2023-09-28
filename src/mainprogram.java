@@ -10,7 +10,7 @@ public class mainprogram {
     {
         
         //Scanner utama buat main
-        Scanner scanner = new Scanner(System.in);
+        // Scanner scanner = new Scanner(System.in);
         //Matrix matrix = InputMatrix.inputFileMatrix(scanner);
         // Matrix matrix = InputMatrix.inputMatrixKeyboard(scanner);
 
@@ -21,9 +21,9 @@ public class mainprogram {
         //InterpolasiPolinomial.Interpolasi(matrix);
         
         //TES REGRESI LINEAR BERGANDA
-        InputMatrix.inputRegresiLinier(scanner);
+        // InputMatrix.inputRegresiLinier(scanner);
        
-        
+        BicubicSpline.koeff();
 
         //Menu Cramer
         // OutputMatrix.tulisSolusi(SPL.Cramer(matrix,false));
@@ -37,8 +37,8 @@ public class mainprogram {
         // OutputMatrix.tulisSolusiGaussJordan(SPL.solutionGaussJordan(matrix), matrix);
         // OutputMatrix.tulisMatrix(matrix);
         
-       
+        
 
     }
-    
-}
+    }    
+
