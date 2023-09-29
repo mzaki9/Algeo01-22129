@@ -10,9 +10,9 @@ public class mainprogram {
     {
         
         //Scanner utama buat main
-        Scanner scanner = new Scanner(System.in);
+        // Scanner scanner = new Scanner(System.in);
         // Matrix matrix = InputMatrix.inputFileMatrix(scanner);
-        Matrix matrix = InputMatrix.inputMatrixKeyboard(scanner);
+        // Matrix matrix = InputMatrix.inputMatrixKeyboard(scanner);
 
         /*Input untuk interpolasi */
 
@@ -24,7 +24,7 @@ public class mainprogram {
         // InputMatrix.inputRegresiLinier(scanner);
        
         //BICUBIC
-        // BicubicSpline.koeff();
+        BicubicSpline.splineimg();
 
         //Menu Cramer
         // OutputMatrix.tulisSolusi(SPL.Cramer(matrix,false));
@@ -36,10 +36,10 @@ public class mainprogram {
         // SPL.createEselonTereduksi(matrix);
         
         // OutputMatrix.tulisSolusiGaussJordan(SPL.solutionGaussJordan(matrix), matrix);
-        OutputMatrix.tulisMatrix(matrix);
+        //OutputMatrix.tulisMatrix(matrix);
 
         //TES DETERMINAN OBE
-        System.out.println(DeterminanOBE.determinanOBE(matrix));
+        //System.out.println(DeterminanOBE.determinanOBE(matrix));
         
         
 

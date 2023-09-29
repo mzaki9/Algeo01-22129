@@ -29,5 +29,18 @@ public class Tools
             }
         }
     }
+
+    public static Matrix multiplyMatrix(Matrix matrix,Matrix b){
+        Matrix x = new Matrix(matrix.getRowEff(), b.getColEff());
+        for (int i = 0; i < matrix.getRowEff(); i++) {
+            double sum = 0.0;
+            for (int j = 0; j < matrix.getColEff(); j++) {
+                sum += matrix.getElmt(i, j) * b.getElmt(j, 0);
+            }
+            x.setElmt(i, 0, sum);
+        }
+
+        return x;
+    }
     
 }
