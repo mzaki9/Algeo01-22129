@@ -4,6 +4,7 @@ import java.io.*;
 import javax.swing.JOptionPane;
 import matrix.Matrix;
 import matrix.SPL;
+import matrix.Tools;
 
 public class OutputMatrix {
     public static void tulisMatrix(Matrix M) {
@@ -107,6 +108,7 @@ public class OutputMatrix {
                 System.out.print(" + " + String.format("%.3f", m.getElmt(i, 0)) + "x^" + i);
             }
         }
+
 
         System.out.println(); // Baris baru setelah cetakan
     }

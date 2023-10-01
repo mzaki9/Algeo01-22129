@@ -159,18 +159,18 @@ public class InputMatrix {
         System.out.println("Masukkan jumlah baris: ");
         row = scanner.nextInt();
 
-        // Pastikan jumlah baris >= 0
+        // Pastikan jumlah baris > 0
         while (row < 0) {
-            System.out.println("Jumlah baris harus lebih besar sama dengan 0. Masukkan jumlah baris yang valid: ");
+            System.out.println("Jumlah baris harus lebih besar dari 0. Masukkan jumlah baris yang valid: ");
             row = scanner.nextInt();
         }
 
         System.out.println("Masukkan jumlah kolom: ");
         col = scanner.nextInt();
 
-        // Pastikan jumlah kolom >= 0
+        // Pastikan jumlah kolom > 0
         while (col < 0) {
-            System.out.println("Jumlah kolom harus lebih besar sama dengan 0. Masukkan jumlah kolom yang valid: ");
+            System.out.println("Jumlah kolom harus lebih besar dari 0. Masukkan jumlah kolom yang valid: ");
             col = scanner.nextInt();
         }
 

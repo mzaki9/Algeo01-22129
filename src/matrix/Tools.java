@@ -1,4 +1,5 @@
 package matrix;
+import java.util.Scanner;
 import java.text.DecimalFormat;
 
 public class Tools 
@@ -51,6 +52,14 @@ public class Tools
         System.out.println("4.Kaidah Cramer");
         System.out.println("5.BALIK KE MENU");
 
+    }
+
+    public static void pause() {
+            System.out.println("\nTekan apapun untuk melanjutkan...");
+            Scanner scanner = new Scanner(System.in);
+            scanner.nextLine();
+            System.out.print("\033[H\033[2J");
+            System.out.flush();
     }
     
 }
