@@ -42,5 +42,15 @@ public class Tools
 
         return x;
     }
+    public static void kirimOpsiMethod()
+    {
+        System.out.println("OPSI METODE");
+        System.out.println("1.Metode Eliminasi Gauss");
+        System.out.println("2.Metode Eliminasi Gauss-Jordan");
+        System.out.println("3.Matriks Metode matriks balikan");
+        System.out.println("4.Kaidah Cramer");
+        System.out.println("5.BALIK KE MENU");
+
+    }
     
 }

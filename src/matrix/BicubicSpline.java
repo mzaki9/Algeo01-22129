@@ -317,7 +317,7 @@ public class BicubicSpline {
         Tools.copyMatrix(bikinKoefD(tempD), koefD);
         Matrix koefX = new Matrix(16, 16), tempX = new Matrix(16, 16);
         Tools.copyMatrix(MatrixBalikan.GaussJordan(bikinKoef(tempX)), koefX);
-Matrix XD = new Matrix(16, 16);
+        Matrix XD = new Matrix(16, 16);
         Tools.copyMatrix(Tools.multiplyMatrix(koefX,koefD),XD);
         OutputMatrix.tulisMatrix(koefX);
     }

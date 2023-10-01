@@ -19,7 +19,7 @@ public class InputMatrix {
 
         return dataXY;
     }
-    public static void inputRegresiLinier(Scanner scanner)
+    public static void inputRegresiLinierKeyboard(Scanner scanner)
     // I.S Menerima scanner 
     // F.S Mengembalikan matriks yang sudah diolah menjadi regresi 
     {
@@ -27,7 +27,7 @@ public class InputMatrix {
         int n = scanner.nextInt();
         System.out.print("Mau ada berapa sampel?  (m): ");
         int m = scanner.nextInt();
-        System.out.println("Matrix dengan " + (n+1) + " kolom ( banyaknya peubah : " + n  +" + 1 y di akhir d) " + "dan " + m + " baris telah dibuat");
+        System.out.println("Matrix dengan " + (n+1) + " kolom ( banyaknya peubah : " + n  +" + 1 y di akhir) " + "dan " + m + " baris telah dibuat");
         System.out.println();
         Matrix matriksRegresi = new Matrix(m, n+1);
         System.out.println("input dengan format x1,x2,...xn,ym (diakhiri dengan nilai y pada sampel tersebut)");
@@ -45,36 +45,109 @@ public class InputMatrix {
         Matrix eEqualReg = new Matrix(matriksRegresi.getColEff(), matriksRegresi.getColEff() + 1);
         Tools.copyMatrix(RegresiLinierBerganda.regresiGanda(matriksRegresi), eEqualReg);
         eEqualReg.Matrix[0][0] = matriksRegresi.getRowEff();
-        OutputMatrix.tulisMatrix(eEqualReg);
+        // OutputMatrix.tulisMatrix(eEqualReg);
         SPL.createMatriksEselon(eEqualReg);
         SPL.createEselonTereduksi(eEqualReg);
         OutputMatrix.tulisMatrix(eEqualReg);
-        Float[] ansTab =  RegresiLinierBerganda.tulisSolusiRegresi(SPL.solutionGaussJordan(eEqualReg), eEqualReg);
-        System.out.println("Persamaan nya adalah : ");
-        System.out.print("y = " + ansTab[0]);
-        for (int i = 1; i < ansTab.length; i++) {
-            if (ansTab[i] > 0)
+        if(SPL.cekSolusiBanyak(eEqualReg) || SPL.cekNoSolution(eEqualReg) || SPL.Same1Utama(eEqualReg))
+        {
+            System.out.println("Tidak Ada Solusi!");
+            if(SPL.cekSolusiBanyak(eEqualReg) || SPL.Same1Utama(eEqualReg))
             {
-                System.out.print(" + " );
-            } 
-            System.out.print(ansTab[i] + " x" + i + " ");
-            
+                System.out.println("Ditemukan 1 baris 0 semua,(Solusi Banyak)");
+            }
         }
-        System.out.println("\nHampirannya berapa? ada " + n +" buah x : ");
-        float hampy = 0;
-        hampy += ansTab[0];
-        for (int i = 1; i <= n; i++) {
-            
-            double x = scanner.nextDouble();
-            hampy += (x * ansTab[i]);
-        }
-        System.out.println("Dan Hampirannya adalah y =  " + hampy);
+        else
+        {
 
+            Float[] ansTab =  RegresiLinierBerganda.tulisSolusiRegresi(SPL.solutionGaussJordan(eEqualReg), eEqualReg);
+            System.out.println("Persamaan nya adalah : ");
+            System.out.print("y = " + ansTab[0]);
+            for (int i = 1; i < ansTab.length; i++) {
+                if (ansTab[i] > 0)
+                {
+                    System.out.print(" + " );
+                } 
+                System.out.print(ansTab[i] + " x" + i + " ");
+                
+            }
+            System.out.println("\nHampirannya berapa? ada " + n +" buah x : ");
+            float hampy = 0;
+            hampy += ansTab[0];
+            for (int i = 1; i <= n; i++) {
+                
+                double x = scanner.nextDouble();
+                hampy += (x * ansTab[i]);
+            }
+            System.out.println("Dan Hampirannya adalah y =  " + hampy);
+        }
+    
 
 
 
 
     }
+    public static void inputRegresiLinierFile(Scanner scanner)
+    {
+        Matrix matrix = inputFileMatrix(scanner);
+        Matrix matriksRegresi = new Matrix(matrix.getRowEff()-1, matrix.getColEff());
+        //Copy Matrix input file ke matriksRegresi untuk pengolahan
+        for (int i = 0; i < matriksRegresi.getRowEff(); i++) {
+            for (int j = 0; j < matriksRegresi.getColEff(); j++) {
+                matriksRegresi.setElmt(i, j, matrix.getElmt(i, j));
+            }
+        }
+        Matrix eEqualReg = new Matrix(matriksRegresi.getColEff(), matriksRegresi.getColEff() + 1);
+        Tools.copyMatrix(RegresiLinierBerganda.regresiGanda(matriksRegresi), eEqualReg);
+        eEqualReg.Matrix[0][0] = matriksRegresi.getRowEff();
+        // OutputMatrix.tulisMatrix(eEqualReg);
+        SPL.createMatriksEselon(eEqualReg);
+        SPL.createEselonTereduksi(eEqualReg);
+        OutputMatrix.tulisMatrix(eEqualReg);
+        if(SPL.cekSolusiBanyak(eEqualReg) || SPL.cekNoSolution(eEqualReg) || SPL.Same1Utama(eEqualReg))
+        {
+            System.out.println("Tidak Ada Solusi!");
+            if(SPL.cekSolusiBanyak(eEqualReg) || SPL.Same1Utama(eEqualReg))
+            {
+                System.out.println("Ditemukan 1 baris 0 semua,(Solusi Banyak)");
+            }
+        }
+        else
+        {
+
+            Float[] ansTab =  RegresiLinierBerganda.tulisSolusiRegresi(SPL.solutionGaussJordan(eEqualReg), eEqualReg);
+            System.out.println("Persamaan nya adalah : ");
+            System.out.print("y = " + ansTab[0]);
+            for (int i = 1; i < ansTab.length; i++) {
+                if (ansTab[i] > 0)
+                {
+                    System.out.print(" + " );
+                } 
+                System.out.print(ansTab[i] + " x" + i + " ");
+                
+            }
+            
+            float hampy = 0;
+            hampy += ansTab[0];
+            System.out.println();
+            for (int i = 0; i < matrix.getColEff() - 1; i++) {
+                hampy += (matrix.getElmt(matrix.getRowEff() - 1,i) * ansTab[i + 1]);
+                System.out.println("X" + (i+1) + " = " + matrix.getElmt(matrix.getRowEff() - 1,i));
+            }
+            System.out.println("Dan Hampirannya adalah y =  " + hampy);
+        }
+    
+
+
+
+
+    }
+
+        
+
+
+
+    
    
     //tes
     public static Matrix inputMatrixKeyboard(Scanner scanner) {
@@ -134,6 +207,7 @@ public class InputMatrix {
                 String line;
                 int RowEff = 0;
                 int ColEff = 0;
+                int tempColEff = 0;
                 // Dapetin jumlah RowEff dan ColEff dari file txt
                 while ((line = reader.readLine()) != null) {
                     // RowEff + 1 tiap dibaca line baru
@@ -141,10 +215,16 @@ public class InputMatrix {
 
                     String[] elements = line.split(" ");
                     // Panjang array elements menunjukkan banyaknya column
-                    ColEff = elements.length;
+                    tempColEff = elements.length;
+
+                    //Handler bila input ada hampiran lain di baris paling bawah, misal regresi linear ganda dan bicubic dan interpolasi
+                    if(tempColEff > ColEff)
+                    {
+                        ColEff = tempColEff;
+                    }
 
                 }
-
+                
                 matrix = new Matrix(RowEff, ColEff);
                 reader.close();
                 // isi ulang
@@ -152,8 +232,10 @@ public class InputMatrix {
                 reader = new BufferedReader(new FileReader(filePath));
                 while ((line = reader.readLine()) != null) {
                     String[] elements = line.split(" ");
-                    for (int j = 0; j < matrix.getColEff(); j++) {
+                    for (int j = 0; j < elements.length; j++) {
+                        
                         matrix.setElmt(i, j, Double.parseDouble(elements[j]));//Konversi dari elemen string menjadi double
+                        
                     }
                     i++;
                 }
@@ -162,8 +244,8 @@ public class InputMatrix {
 
             } catch (IOException e) {
                 
-                System.out.println("========================================================");
-                System.out.println("ERROR! File tidak ditemukan, silahkan input ulang!");
+                System.out.println("\n========================================================");
+                System.out.println(" silahkan input nama file txt, ex: tes1 dari tes1.txt");
                 System.out.println("========================================================");
                 filePath = null;
 
