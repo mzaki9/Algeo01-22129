@@ -33,12 +33,15 @@ public class Tools
 
     public static Matrix multiplyMatrix(Matrix matrix,Matrix b){
         Matrix x = new Matrix(matrix.getRowEff(), b.getColEff());
+        double sum=0.0;
         for (int i = 0; i < matrix.getRowEff(); i++) {
-            double sum = 0.0;
-            for (int j = 0; j < matrix.getColEff(); j++) {
-                sum += matrix.getElmt(i, j) * b.getElmt(j, 0);
+            for (int j = 0; j < b.getColEff(); j++) {
+                sum = 0.0;
+                for (int k = 0; k < matrix.getColEff();k++)
+                {sum += matrix.getElmt(i, k) * b.getElmt(k,j);}
+                x.setElmt(i, j, sum);
             }
-            x.setElmt(i, 0, sum);
+            
         }
 
         return x;
@@ -61,5 +64,9 @@ public class Tools
             System.out.print("\033[H\033[2J");
             System.out.flush();
     }
-    
+    public static void kirimOpsiSimpan(){
+        System.out.println("Apakah jawaban mau disimpan?");
+        System.out.println("1.iya");
+        System.out.println("2.tidak");
+    }
 }

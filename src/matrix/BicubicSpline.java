@@ -1,6 +1,12 @@
 package matrix;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 
 import iomatrix.OutputMatrix;
+
+import java.awt.image.BufferedImage;
+
 
 //TES
 public class BicubicSpline {
@@ -130,10 +136,12 @@ public class BicubicSpline {
     }
 
     public static double fspline(double x, double y, Matrix aij) {
+        double absx = Math.abs(x);
+        double absy = Math.abs(y);
         double value = 0;
         for (int j = 0; j < 4; j++) {
             for (int i = 0; i < 4; i++) {
-                value += aij.getElmt(i, j) * (Math.pow(x, i) * Math.pow(y, j));
+                value += aij.getElmt(i, j) * (Math.pow(absx, i) * Math.pow(absy, j));
             }
         }
 
@@ -162,7 +170,7 @@ public class BicubicSpline {
             akhir.setElmt(i / 4, i % 4, hasil.getElmt(i, 0));
         }
 
-        OutputMatrix.tulisMatrix(akhir);
+        // OutputMatrix.tulisMatrix(akhir);
         System.out.println("HASIL : " + fspline(0.5, 0.5, akhir));
     }
 
@@ -312,14 +320,27 @@ public class BicubicSpline {
         return koefD;
     }
 
-    public static void splineimg() {
+    public static double spline(Matrix matrix, double x, double y) {
         Matrix koefD = new Matrix(16, 16), tempD = new Matrix(16, 16);
         Tools.copyMatrix(bikinKoefD(tempD), koefD);
         Matrix koefX = new Matrix(16, 16), tempX = new Matrix(16, 16);
         Tools.copyMatrix(MatrixBalikan.GaussJordan(bikinKoef(tempX)), koefX);
         Matrix XD = new Matrix(16, 16);
-        Tools.copyMatrix(Tools.multiplyMatrix(koefX,koefD),XD);
-        OutputMatrix.tulisMatrix(koefX);
+        Tools.copyMatrix(Kofaktor.DividebyCons(Tools.multiplyMatrix(koefX,koefD),4),XD);
+        Matrix input = new Matrix(16,1), hasil = new Matrix(16,1), akhir = new Matrix(4,4);
+        for (int i = 0; i < matrix.getRowEff(); i++) {
+            for (int j = 0; j < matrix.getColEff(); j++) {
+                input.setElmt(4 * i + j, 0, matrix.getElmt(i, j));
+            }
+        }
+        Tools.copyMatrix(Tools.multiplyMatrix(XD,input),hasil);
+          for (int i = 0; i < hasil.getRowEff(); i++) {
+            akhir.setElmt(i / 4, i % 4, hasil.getElmt(i, 0));
+        }
+        return fspline(x, y, akhir);
     }
-
+    // public static void main(String[] args){
+    //     OutputMatrix.tulisMatrix(splineId());
+    // }
+    
 }

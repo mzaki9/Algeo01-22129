@@ -1,12 +1,14 @@
 package iomatrix;
-
 import java.io.*;
 import javax.swing.JOptionPane;
 import matrix.Matrix;
 import matrix.SPL;
 import matrix.Tools;
 
+
 public class OutputMatrix {
+    static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
     public static void tulisMatrix(Matrix M) {
         for (int i = 0; i < M.getRowEff(); i++) {
             for (int j = 0; j < M.getColEff(); j++) {
@@ -46,7 +48,9 @@ public class OutputMatrix {
     public static void createFile() {
         try {
             pathMaker();
-            File file = new File(dir + "result.txt");
+            System.out.println("Masukkan nama file: ");
+            String name = reader.readLine();
+            File file = new File(dir + name);
             if (!file.exists()) {
                 file.createNewFile();
             }
@@ -54,8 +58,14 @@ public class OutputMatrix {
         } catch (IOException e) {
             System.out.println("Terjadi error.");
             JOptionPane.showMessageDialog(null, "Terjadi error. ", "Error!", JOptionPane.ERROR_MESSAGE);
-        }
+        } finally {
+            try {
+                reader.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
     }
+}
 
     public static String matrixToString(Matrix M) {
         String s = "";

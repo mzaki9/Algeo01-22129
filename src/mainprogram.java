@@ -149,7 +149,9 @@ public class mainprogram {
             else if (opsiMenu == 2) {
                 isMenu = false;
                 while (isMenu == false) {
-
+                    System.out.println("OPSI METODE");
+                    System.out.println("1.Metode Eliminasi Gauss");
+                    System.out.println("2.Metode Ekspansi Kofaktor");
                     System.out.println("5.BALIK KE MENU");
                     int opsiMethod = scanner.nextInt();
 
@@ -158,6 +160,40 @@ public class mainprogram {
 
                         Tools.pause();
                         isMenu = true;
+                    } else {
+                        if (opsiMethod ==2) {
+                            System.out.println("Mau input matriks dalam bentuk apa?");
+                            System.out.println("1. Keyboard");
+                            System.out.println("2. Input File");
+                            int opsiInput = scanner.nextInt();
+                            if (opsiInput==1){
+                                System.out.println("Kamu mau input matriks lewat apa?");
+                                System.out.println("1.Keyboard");
+                                System.out.println("2.File");
+                                System.out.println("5.BALIK KE MENU"); 
+                                Matrix matrix = new Matrix(10,10);
+                                int opsiinput = scanner.nextInt();
+                                if (opsiinput==5){
+                                    Tools.pause();
+                                    isMenu = true;
+                                }
+                                else {if (opsiinput==1){
+                                    matrix = InputMatrix.inputMatrixKeyboard(scanner);
+                                }
+                                else if (opsiinput==2){
+                                    matrix = InputMatrix.inputFileMatrix(scanner);
+                                }}
+                                Kofaktor.TulisDetKofaktor(Kofaktor.hitungDeterminan(matrix));
+                                Tools.kirimOpsiSimpan();
+                                int opsiHasil = scanner.nextInt();
+                                if (opsiHasil==1){
+                                    String s = "Determinannya adalah: " + Kofaktor.hitungDeterminan(matrix);
+                                    OutputMatrix.TuliskeTxt(s);
+                                }
+                                Tools.pause();
+                                isMenu = true;
+                            }
+                        }
                     }
                 }
 
@@ -166,7 +202,9 @@ public class mainprogram {
             else if (opsiMenu == 3) {
                 isMenu = false;
                 while (isMenu == false) {
-
+                    System.out.println("OPSI METODE");
+                    System.out.println("1.Metode Gauss-Jordan");
+                    System.out.println("2.Metode Adjoin/Kofaktor");                
                     System.out.println("5.BALIK KE MENU");
                     int opsiMethod = scanner.nextInt();
 
@@ -175,6 +213,35 @@ public class mainprogram {
 
                         Tools.pause();
                         isMenu = true;
+                    } else {
+                        if (opsiMethod ==2){
+                            System.out.println("Kamu mau input matriks lewat apa?");
+                            System.out.println("1.Keyboard");
+                            System.out.println("2.File");
+                            System.out.println("5.BALIK KE MENU"); 
+                            Matrix matrix = new Matrix(10,10);
+                            int opsiinput = scanner.nextInt();
+                            if (opsiinput==5){
+                                Tools.pause();
+                                isMenu = true;
+                            }
+                            else {if (opsiinput==1){
+                                matrix = InputMatrix.inputMatrixKeyboard(scanner);
+                            }
+                            else if (opsiinput==2){
+                                matrix = InputMatrix.inputFileMatrix(scanner);
+                            }}
+
+                            Kofaktor.TulisInverse(Kofaktor.InverseKofaktor(matrix));
+                            Tools.kirimOpsiSimpan();
+                            int opsiHasil = scanner.nextInt();
+                            if (opsiHasil==1){
+                                String s = "Matrix inversenya adalah:\n" + OutputMatrix.matrixToString( Kofaktor.InverseKofaktor(matrix));
+                                OutputMatrix.TuliskeTxt(s);
+                            }
+                            Tools.pause();
+                            isMenu = true;
+                        }
                     }
                 }
 
@@ -217,7 +284,10 @@ public class mainprogram {
                 while (isMenu == false) {
                     Tools.kirimOpsiMethod();
                     int opsiMethod = scanner.nextInt();
-
+                    System.out.println("Mau input matriks dalam bentuk apa?");
+                    System.out.println("1. Keyboard");
+                    System.out.println("2. Input File");
+                    System.out.println("5.BALIK KE MENU");
                     // Balik Ke Menu
                     if (opsiMethod == 5) {
                         Tools.pause();
