@@ -161,28 +161,14 @@ public class mainprogram {
                         Tools.pause();
                         isMenu = true;
                     } else {
-                        if (opsiMethod ==2) {
+                        if (opsiMethod ==2) 
+                        {
                             System.out.println("Mau input matriks dalam bentuk apa?");
                             System.out.println("1. Keyboard");
                             System.out.println("2. Input File");
                             int opsiInput = scanner.nextInt();
                             if (opsiInput==1){
-                                System.out.println("Kamu mau input matriks lewat apa?");
-                                System.out.println("1.Keyboard");
-                                System.out.println("2.File");
-                                System.out.println("5.BALIK KE MENU"); 
-                                Matrix matrix = new Matrix(10,10);
-                                int opsiinput = scanner.nextInt();
-                                if (opsiinput==5){
-                                    Tools.pause();
-                                    isMenu = true;
-                                }
-                                else {if (opsiinput==1){
-                                    matrix = InputMatrix.inputMatrixKeyboard(scanner);
-                                }
-                                else if (opsiinput==2){
-                                    matrix = InputMatrix.inputFileMatrix(scanner);
-                                }}
+                                Matrix matrix = InputMatrix.inputMatrixKeyboard(scanner);
                                 Kofaktor.TulisDetKofaktor(Kofaktor.hitungDeterminan(matrix));
                                 Tools.kirimOpsiSimpan();
                                 int opsiHasil = scanner.nextInt();
@@ -192,7 +178,64 @@ public class mainprogram {
                                 }
                                 Tools.pause();
                                 isMenu = true;
+                                
                             }
+                            else if(opsiInput == 2)
+                            {
+                                Matrix matrix = InputMatrix.inputFileMatrix(scanner);
+                                Kofaktor.TulisDetKofaktor(Kofaktor.hitungDeterminan(matrix));
+                                Tools.kirimOpsiSimpan();
+                                int opsiHasil = scanner.nextInt();
+                                if (opsiHasil==1){
+                                    String s = "Determinannya adalah: " + Kofaktor.hitungDeterminan(matrix);
+                                    OutputMatrix.TuliskeTxt(s);
+                                }
+                                 Tools.pause();
+                                isMenu = true;
+                            }
+                            else
+                            {
+                                System.out.println("Input Tidak valid! balik ke menu");
+                                Tools.pause();
+                                isMenu = true;
+                            }
+                            
+                            
+                           
+                        }
+                        else if(opsiMethod == 1)
+                        {
+                            System.out.println("Mau input matriks dalam bentuk apa?");
+                            System.out.println("1. Keyboard");
+                            System.out.println("2. Input File");
+                            int opsiInput = scanner.nextInt();
+                            if(opsiInput == 1)
+                            {
+                                Matrix matrix = InputMatrix.inputMatrixKeyboard(scanner);
+                                System.out.println("Determinanya adalah : ");
+                                System.out.println(DeterminanOBE.determinanOBE(matrix));
+                                //Kirim hasil
+                                Tools.kirimOpsiSimpan();
+                                int opsiHasil = scanner.nextInt();
+                                isMenu = true;
+                            }
+                            else if(opsiInput == 2)
+                            {
+                                Matrix matrix = InputMatrix.inputFileMatrix(scanner);
+                                System.out.println("Determinanya adalah : ");
+                                System.out.println(DeterminanOBE.determinanOBE(matrix));
+                                //Kirim hasil
+                                Tools.kirimOpsiSimpan();
+                                int opsiHasil = scanner.nextInt();
+                                isMenu = true;
+                            }
+                            else
+                            {
+                                System.out.println("Tidak valid! balik ke menu");
+                                Tools.pause();
+                                isMenu = true;
+                            }
+                            
                         }
                     }
                 }
@@ -218,19 +261,22 @@ public class mainprogram {
                             System.out.println("Kamu mau input matriks lewat apa?");
                             System.out.println("1.Keyboard");
                             System.out.println("2.File");
-                            System.out.println("5.BALIK KE MENU"); 
+                            //Kenapa 10,10 row sama colnya
                             Matrix matrix = new Matrix(10,10);
                             int opsiinput = scanner.nextInt();
-                            if (opsiinput==5){
-                                Tools.pause();
-                                isMenu = true;
-                            }
-                            else {if (opsiinput==1){
+
+                            if (opsiinput==1){
                                 matrix = InputMatrix.inputMatrixKeyboard(scanner);
                             }
                             else if (opsiinput==2){
                                 matrix = InputMatrix.inputFileMatrix(scanner);
-                            }}
+                            }
+                            else
+                            {
+                                System.out.println("Tidak valid! balik ke menu");
+                                Tools.pause();
+                                isMenu = true;
+                            }
 
                             Kofaktor.TulisInverse(Kofaktor.InverseKofaktor(matrix));
                             Tools.kirimOpsiSimpan();
@@ -319,6 +365,7 @@ public class mainprogram {
                         Tools.pause();
                         isMenu = true;
                         break;
+                       
                     }
 
                     // Abis ini ada Info Mau dikirim hasilnya ke txt atau nggak, buat Andi
@@ -337,7 +384,7 @@ public class mainprogram {
             else if (opsiMenu == 7) {
                 isMenu = false;
                 while (isMenu == false) {
-
+                    System.out.println("5.BALIK KE MENU");
                     int opsiMethod = scanner.nextInt();
 
                     // Balik Ke Menu
