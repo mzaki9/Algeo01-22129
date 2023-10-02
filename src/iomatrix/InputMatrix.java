@@ -19,6 +19,20 @@ public class InputMatrix {
 
         return dataXY;
     }
+    public static Matrix  inputHilbert(Scanner scanner)
+    {
+        System.out.print("Masukkan nilai n :  ");
+        int n = scanner.nextInt();
+        Matrix hilb = new Matrix(n, n+1);
+        hilb.setElmt(0, hilb.getColEff()-1, 1);
+        for (int i = 0; i < hilb.getRowEff(); i++) {
+            for (int j = 0; j < hilb.getColEff()-1; j++) {
+                double hasil = (double) 1/((i+j)+ 1);
+                hilb.setElmt(i, j,hasil );
+            }
+        }
+        return hilb;
+    }
     public static void inputRegresiLinierKeyboard(Scanner scanner)
     // I.S Menerima scanner 
     // F.S Mengembalikan matriks yang sudah diolah menjadi regresi 

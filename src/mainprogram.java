@@ -12,6 +12,7 @@ public class mainprogram {
 
         // Scanner utama buat main
         Scanner scanner = new Scanner(System.in);
+        
         while (startprogram) {
             boolean isMenu = true;
             System.out.println("===============MENU================");
@@ -46,14 +47,22 @@ public class mainprogram {
                             System.out.println("Mau input matriks dalam bentuk apa?");
                             System.out.println("1. Keyboard");
                             System.out.println("2. Input File");
+                            System.out.println("3. Input Matrix Hilbert");
                             int opsiInput = scanner.nextInt();
                             if (opsiInput == 1) {
                                 Matrix matrix = InputMatrix.inputMatrixKeyboard(scanner);
                                 SPL.createMatriksEselon(matrix);
                                 SPL.createEselonTereduksi(matrix);
                                 OutputMatrix.tulisSolusiGaussJordan(SPL.solutionGaussJordan(matrix), matrix);
-                            } else {
+                            } else if(opsiInput == 2){
                                 Matrix matrix = InputMatrix.inputFileMatrix(scanner);
+                                SPL.createMatriksEselon(matrix);
+                                SPL.createEselonTereduksi(matrix);
+                                OutputMatrix.tulisSolusiGaussJordan(SPL.solutionGaussJordan(matrix), matrix);
+                            }
+                            else if(opsiInput == 3)
+                            {
+                                Matrix matrix = InputMatrix.inputHilbert(scanner);
                                 SPL.createMatriksEselon(matrix);
                                 SPL.createEselonTereduksi(matrix);
                                 OutputMatrix.tulisSolusiGaussJordan(SPL.solutionGaussJordan(matrix), matrix);
@@ -73,14 +82,22 @@ public class mainprogram {
                             System.out.println("Mau input matriks dalam bentuk apa?");
                             System.out.println("1. Keyboard");
                             System.out.println("2. Input File");
+                            System.out.println("3. Input Matrix Hilbert");
                             int opsiInput = scanner.nextInt();
                             if (opsiInput == 1) {
                                 Matrix matrix = InputMatrix.inputMatrixKeyboard(scanner);
                                 SPL.createMatriksEselon(matrix);
                                 SPL.createEselonTereduksi(matrix);
                                 OutputMatrix.tulisSolusiGaussJordan(SPL.solutionGaussJordan(matrix), matrix);
-                            } else {
+                            } else if (opsiInput ==2){
                                 Matrix matrix = InputMatrix.inputFileMatrix(scanner);
+                                SPL.createMatriksEselon(matrix);
+                                SPL.createEselonTereduksi(matrix);
+                                OutputMatrix.tulisSolusiGaussJordan(SPL.solutionGaussJordan(matrix), matrix);
+                            }
+                            else if(opsiInput == 3)
+                            {
+                                Matrix matrix = InputMatrix.inputHilbert(scanner);
                                 SPL.createMatriksEselon(matrix);
                                 SPL.createEselonTereduksi(matrix);
                                 OutputMatrix.tulisSolusiGaussJordan(SPL.solutionGaussJordan(matrix), matrix);
@@ -99,15 +116,22 @@ public class mainprogram {
                             System.out.println("Mau input matriks dalam bentuk apa?");
                             System.out.println("1. Keyboard");
                             System.out.println("2. Input File");
+                            System.out.println("3. Input Matrix Hilbert");
                             int opsiInput = scanner.nextInt();
                             if (opsiInput == 1) {
                                 Matrix matrix = InputMatrix.inputMatrixKeyboard(scanner);
                                 SPL.inverseMatrix(matrix);
 
-                            } else {
+                            } else if(opsiInput == 2){
                                 Matrix matrix = InputMatrix.inputFileMatrix(scanner);
                                 SPL.inverseMatrix(matrix);
                             }
+                            else if(opsiInput == 3)
+                            {
+                                Matrix matrix = InputMatrix.inputHilbert(scanner);
+                                SPL.inverseMatrix(matrix);
+                            }
+                            
                             // Abis ini ada Info Mau dikirim hasilnya ke txt atau nggak, buat Andi
                             System.out.println("Apakah jawaban mau disimpan?");
                             System.out.println("1.iya");
@@ -121,15 +145,22 @@ public class mainprogram {
                             System.out.println("Mau input matriks dalam bentuk apa?");
                             System.out.println("1. Keyboard");
                             System.out.println("2. Input File");
+                            System.out.println("3. Input Matrix Hilbert");
                             int opsiInput = scanner.nextInt();
                             if (opsiInput == 1) {
                                 Matrix matrix = InputMatrix.inputMatrixKeyboard(scanner);
                                 OutputMatrix.tulisSolusi(SPL.Cramer(matrix, false));
 
-                            } else {
+                            } else if(opsiInput ==2){
                                 Matrix matrix = InputMatrix.inputFileMatrix(scanner);
                                 OutputMatrix.tulisSolusi(SPL.Cramer(matrix, false));
                             }
+                            else if(opsiInput == 3)
+                            {
+                                Matrix matrix = InputMatrix.inputHilbert(scanner);
+                                OutputMatrix.tulisSolusi(SPL.Cramer(matrix, false));
+                            }
+                            
                             // Abis ini ada Info Mau dikirim hasilnya ke txt atau nggak, buat Andi
                             System.out.println("Apakah jawaban mau disimpan?");
                             System.out.println("1.iya");
@@ -382,6 +413,7 @@ public class mainprogram {
             }
             // ===Pembesaran Gambar dengan Bicubic SPline=====
             else if (opsiMenu == 7) {
+                Matrix matrix = InputMatrix.inputHilbert(scanner);
                 isMenu = false;
                 while (isMenu == false) {
                     System.out.println("5.BALIK KE MENU");
