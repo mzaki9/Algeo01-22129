@@ -81,32 +81,28 @@ public class SPL {
     }
 
     public static boolean cekNoSolution(Matrix m)
-    //Cek apabila ditemukan pola tak ada solusi (di baris i semua 0 kecuali di kolomn akhir)
+    // Cek apabila ditemukan pola tak ada solusi (di baris i semua 0 kecuali di
+    // kolomn akhir)
     /*
      * contoh 1 2 2 3
-     *        0 1 5 4
-     *        0 0 0 1
+     * 0 1 5 4
+     * 0 0 0 1
      */
     {
         int j;
-        
-        
-            for (int i = 0; i < m.getRowEff(); i++) 
-            {
-               
-                j = m.getColEff() - 2;
-                while (j >= 0 && m.getElmt(i, j) == 0)
-                {
-                    j--;
-                }
-                if(j == -1 && m.getElmt(i, m.getColEff() - 1) != 0)
-                {
-                    return true;
-                }
+
+        for (int i = 0; i < m.getRowEff(); i++) {
+
+            j = m.getColEff() - 2;
+            while (j >= 0 && m.getElmt(i, j) == 0) {
+                j--;
             }
-            return false;
-        
-       
+            if (j == -1 && m.getElmt(i, m.getColEff() - 1) != 0) {
+                return true;
+            }
+        }
+        return false;
+
     }
 
     public static boolean cekSolusiBanyak(Matrix m)
@@ -228,12 +224,12 @@ public class SPL {
 
     public static void createEselonTereduksi(Matrix m) {
         // Prekondisi : Harus di eselon baris dulu matrkisnya
-        
+
         int k;
         int j1utama = 0;
         int batasAugmented = m.getColEff() - 1;
         for (int i = 1; i < m.getRowEff(); i++) {
-            //Untuk mendapatkan 1 utama berada di kolom berapa
+            // Untuk mendapatkan 1 utama berada di kolom berapa
             j1utama = 0;
             while (m.getElmt(i, j1utama) != 1 && j1utama < batasAugmented) {
                 j1utama++;
@@ -264,114 +260,111 @@ public class SPL {
 
             }
 
-            
             // udah nemu 1 utama
 
         }
-        
 
     }
+
     public static String[] solutionGaussJordan(Matrix m)
-    //PREKONDSI :  Matriks sudah berbentuk matriks eselon tereduksi
+    // PREKONDSI : Matriks sudah berbentuk matriks eselon tereduksi
     // Menghasilkan matriks string yang berisi solusi
-    {   
+    {
         int j1utama;
-        String[] ans = new String[m.getColEff()-1];
+        String[] ans = new String[m.getColEff() - 1];
         for (int k = 0; k < ans.length; k++) {
-            ans[k] = ""; 
+            ans[k] = "";
         }
-        int batasAugmented = m.getColEff()-1;
+        int batasAugmented = m.getColEff() - 1;
         for (int i = 0; i < m.getRowEff(); i++) {
             boolean cekb = false;
             j1utama = 0;
 
             // Mencari kolom dari 1 utama
-            while (m.getElmt(i, j1utama)!= 1 && j1utama < batasAugmented) 
-            {
+            while (m.getElmt(i, j1utama) != 1 && j1utama < batasAugmented) {
                 j1utama++;
             }
-            if(j1utama != batasAugmented)
-            {
-            for (int j = 0; j < batasAugmented; j++) {
-                
-                //apabila ditemukan 0 dan kolom j tidak sama dengan kolom j1utama, ATAU j1utama berada di akhir
-                if(j != j1utama && m.getElmt(i, j) != 0 || cekBarisUnik(m, i) )
-                {
-                  
-                    if(!(cekBarisUnik(m, i)))
-                    {
-                        if((-1) * m.getElmt(i, j) > 0)
+            if (j1utama != batasAugmented) {
+                for (int j = 0; j < batasAugmented; j++) {
+
+                    // apabila ditemukan 0 dan kolom j tidak sama dengan kolom j1utama, ATAU j1utama
+                    // berada di akhir
+                    if (j != j1utama && m.getElmt(i, j) != 0 || cekBarisUnik(m, i)) {
+
+                        if (!(cekBarisUnik(m, i))) {
+                            if ((-1) * m.getElmt(i, j) > 0) {
+                                if (ans[j1utama] != "") {
+                                    ans[j1utama] += "+ ";
+                                }
+                                ans[j1utama] += Double.toString((-1) * m.getElmt(i, j)) + "R" + Integer.toString(j + 1)
+                                        + " ";
+                            } else {
+                                ans[j1utama] += "- " + Double.toString(m.getElmt(i, j)) + "R" + Integer.toString(j + 1)
+                                        + " ";
+                            }
+                        }
+
+                        // Memasukkan nilai b di akhir persamaan
+                        if (m.getElmt(i, batasAugmented) > 0 && cekb == false && j == batasAugmented - 1) // j ==
+                                                                                                          // batasaugmented
+                                                                                                          // - 1 agar
+                                                                                                          // penempatan
+                                                                                                          // si B di
+                                                                                                          // akhir
+                                                                                                          // persamaan.
                         {
-                            if(ans[j1utama] != "")
-                            {
+                            if (ans[j1utama] != "") {
                                 ans[j1utama] += "+ ";
                             }
-                            ans[j1utama] +=  Double.toString((-1)*m.getElmt(i, j)) + "R" + Integer.toString(j+1)+ " " ;
-                        }
-                        else
-                        {   
-                            ans[j1utama] += "- " + Double.toString(m.getElmt(i, j)) + "R" + Integer.toString(j+1) + " ";
-                        }
-                    }
-                   
-                    //Memasukkan nilai b di akhir persamaan 
-                    if (m.getElmt(i, batasAugmented) > 0  && cekb == false && j == batasAugmented - 1) // j == batasaugmented - 1 agar penempatan si B di akhir persamaan.
-                    {
-                        if(ans[j1utama] != "")
+                            ans[j1utama] += Double.toString(m.getElmt(i, batasAugmented));
+                            cekb = true;
+                        } else if (m.getElmt(i, batasAugmented) < 0 && cekb == false && j == batasAugmented - 1)// apabila
+                                                                                                                // b di
+                                                                                                                // akhir
+                                                                                                                // negatif
                         {
-                            ans[j1utama] += "+ ";
+                            if (ans[j1utama] != "") {
+                                ans[j1utama] += "";
+                            }
+                            ans[j1utama] += Double.toString(m.getElmt(i, batasAugmented));
+                            cekb = true;
                         }
-                        ans[j1utama] +=  Double.toString(m.getElmt(i, batasAugmented));
-                        cekb = true;
+
                     }
-                    else if(m.getElmt(i, batasAugmented) < 0 && cekb == false && j == batasAugmented - 1)//apabila b di akhir negatif
-                    {
-                        if(ans[j1utama] != "")
-                        {
-                            ans[j1utama] += "";
-                        }
-                        ans[j1utama] +=  Double.toString(m.getElmt(i, batasAugmented));
-                        cekb = true;
-                    }
-                    
                 }
-            }
-            
+
             }
         }
-        return ans; 
+        return ans;
     }
-    public static boolean Same1Utama(Matrix m)
-    {
-        //Mengembalikan nilai TRUE apabila ditemukan 1 utama yang lebih dari 1 dalam 1 kolom(berarti tidak ada solusi)
-        
+
+    public static boolean Same1Utama(Matrix m) {
+        // Mengembalikan nilai TRUE apabila ditemukan 1 utama yang lebih dari 1 dalam 1
+        // kolom(berarti tidak ada solusi)
+
         boolean cek;
         for (int j = 0; j < m.getColEff() - 1; j++) {
-            
+
             cek = false;
             for (int i = 0; i < m.getRowEff(); i++) {
-                //cek 1 utama
-                if (m.getElmt(i, j) == 1 && cek == false)
-                {
+                // cek 1 utama
+                if (m.getElmt(i, j) == 1 && cek == false) {
                     cek = true;
-                }
-                else if(m.getElmt(i, j) == 1 && cek == true)
-                {
+                } else if (m.getElmt(i, j) == 1 && cek == true) {
                     return true;
                 }
             }
         }
         return false;
-       
+
     }
 
-
-    public static void inverseMatrix(Matrix m) {
+    public static Matrix inverseMatrix(Matrix m) {
         int n = m.getRowEff();
 
-        if(m.getColEff()-1 != m.getRowEff() || Kofaktor.hitungDeterminan(m) == 0){
+        if (m.getColEff() - 1 != m.getRowEff() || Kofaktor.hitungDeterminan(m) == 0) {
             System.out.println("Matrix tidak valid / atau tidak memiliki solusi unik");
-            return;
+            return null;
         }
 
         Matrix matrixTanpaB = new Matrix(n, n);
@@ -381,40 +374,43 @@ public class SPL {
 
         matrixTanpaB = matrixWithoutB(m);
         hasil = MatrixBalikan.GaussJordan(matrixTanpaB);
-
-     
-        // X = hasil^-1 * b
-        for (int i = 0; i < hasil.getRowEff(); i++) {
-            double sum = 0.0;
-            for (int j = 0; j < hasil.getColEff(); j++) {
-                sum += hasil.getElmt(i, j) * b.getElmt(j, 0);
+        if (hasil != null) {
+            // X = hasil^-1 * b
+            for (int i = 0; i < hasil.getRowEff(); i++) {
+                double sum = 0.0;
+                for (int j = 0; j < hasil.getColEff(); j++) {
+                    sum += hasil.getElmt(i, j) * b.getElmt(j, 0);
+                }
+                x.setElmt(i, 0, sum);
             }
-            x.setElmt(i, 0, sum);
+
+            OutputMatrix.tulisSolusi(x);
         }
-        
-        OutputMatrix.tulisSolusi(x);;
+        else{
+            return null;
+        }
+
+        return x;
+
     }
 
-    
-
-    public static Matrix Cramer(Matrix m,Boolean isInterpolasi) {
+    public static Matrix Cramer(Matrix m, Boolean isInterpolasi) {
 
         Matrix matrix = new Matrix(m.getRowEff(), m.getRowEff());
-        Matrix x = new Matrix(m.getRowEff(), 1); //matrix ini dibuat untuk menyimpan hasil x
+        Matrix x = new Matrix(m.getRowEff(), 1); // matrix ini dibuat untuk menyimpan hasil x
         Matrix b = extractB(m); // Ambil "b" dari matrix original
         Matrix temp = new Matrix(m.getRowEff(), m.getRowEff());
 
-        Tools.copyMatrix(matrixWithoutB(m),matrix);
+        Tools.copyMatrix(matrixWithoutB(m), matrix);
 
         double determinan = Kofaktor.hitungDeterminan(matrix);
 
-        if (isInterpolasi){
+        if (isInterpolasi) {
             if (determinan == 0) {
-            System.out.println("Determinan matriks adalah nol, tidak ada solusi atau solusi tidak unik.");
-         }
+                System.out.println("Determinan matriks adalah nol, tidak ada solusi atau solusi tidak unik.");
+            }
         }
-        
-        
+
         // Mulai Cramer
         for (int i = 0; i < matrix.getColEff(); i++) {
             Tools.copyMatrix(matrix, temp);
@@ -425,11 +421,11 @@ public class SPL {
         }
 
         return x;
-        //OutputMatrix.printSolution(x);
+        // OutputMatrix.printSolution(x);
     }
 
     public static Matrix matrixWithoutB(Matrix m) {
-        //Function ini tidak mengambil nilali "b" dari matrix original
+        // Function ini tidak mengambil nilali "b" dari matrix original
 
         Matrix matrixTanpaB = new Matrix(m.getRowEff(), m.getRowEff());
         for (int i = 0; i < m.getRowEff(); i++) {
@@ -442,7 +438,7 @@ public class SPL {
     }
 
     public static Matrix extractB(Matrix m) {
-        //Function ini mengambil nilai "b" dari matrix
+        // Function ini mengambil nilai "b" dari matrix
 
         Matrix b = new Matrix(m.getRowEff(), 1);
         // Ambil "b" dari matrix original

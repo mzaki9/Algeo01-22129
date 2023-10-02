@@ -69,4 +69,12 @@ public class Tools
         System.out.println("1.iya");
         System.out.println("2.tidak");
     }
+
+    public static boolean checkSquare(Matrix m){
+        if(m.getColEff() == m.getRowEff()){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

@@ -4,6 +4,7 @@ public class MatrixBalikan {
 
     public static Matrix GaussJordan(Matrix m) {
 
+
         Matrix augmentedMatrix = new Matrix(m.getRowEff(), m.getRowEff() * 2);
 
         // Buat Matrix dengan [Matrix asal | Matrix Identitas]
@@ -37,8 +38,8 @@ public class MatrixBalikan {
                     SPL.swapBaris(augmentedMatrix, i, swapRow);
 
                 } else {
-
-                    throw new ArithmeticException("Matrix tidak mempunyai balikan");
+                    System.out.println("Matrix tidak mempunyai balikan");
+                    return null;
                 }
             }
             double key = augmentedMatrix.getElmt(i, i);
