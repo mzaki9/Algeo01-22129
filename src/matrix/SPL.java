@@ -362,7 +362,7 @@ public class SPL {
     public static Matrix inverseMatrix(Matrix m) {
         int n = m.getRowEff();
 
-        if (m.getColEff() - 1 != m.getRowEff() || Kofaktor.hitungDeterminan(m) == 0) {
+        if (/* m.getColEff() - 1 != m.getRowEff() */ Kofaktor.hitungDeterminan(m) == 0) {
             System.out.println("Matrix tidak valid / atau tidak memiliki solusi unik");
             return null;
         }
@@ -385,8 +385,7 @@ public class SPL {
             }
 
             OutputMatrix.tulisSolusi(x);
-        }
-        else{
+        } else {
             return null;
         }
 
@@ -396,20 +395,27 @@ public class SPL {
 
     public static Matrix Cramer(Matrix m, Boolean isInterpolasi) {
 
-        Matrix matrix = new Matrix(m.getRowEff(), m.getRowEff());
-        Matrix x = new Matrix(m.getRowEff(), 1); // matrix ini dibuat untuk menyimpan hasil x
-        Matrix b = extractB(m); // Ambil "b" dari matrix original
-        Matrix temp = new Matrix(m.getRowEff(), m.getRowEff());
+        // Check Cramer
+        if (m.getRowEff() == m.getColEff()) {
+            System.out.println("Matrix tidak valid");
+            return null;
+        }
 
-        Tools.copyMatrix(matrixWithoutB(m), matrix);
+        Matrix matrix = null;
+
+        Matrix b = extractB(m); // Ambil "b" dari matrix original
+
+        matrix = matrixWithoutB(m);
+        // Tools.copyMatrix(matrixWithoutB(m), matrix);
 
         double determinan = Kofaktor.hitungDeterminan(matrix);
-
-        if (isInterpolasi) {
-            if (determinan == 0) {
-                System.out.println("Determinan matriks adalah nol, tidak ada solusi atau solusi tidak unik.");
-            }
+        if (determinan == 0) {
+            System.out.println("Determinan matriks adalah nol, tidak ada solusi atau solusi tidak unik.");
+            return null;
         }
+
+        Matrix temp = new Matrix(m.getRowEff(), m.getColEff());
+        Matrix x = new Matrix(matrix.getColEff(), 1); // matrix ini dibuat untuk menyimpan hasil x
 
         // Mulai Cramer
         for (int i = 0; i < matrix.getColEff(); i++) {
@@ -421,15 +427,14 @@ public class SPL {
         }
 
         return x;
-        // OutputMatrix.printSolution(x);
     }
 
     public static Matrix matrixWithoutB(Matrix m) {
         // Function ini tidak mengambil nilali "b" dari matrix original
 
-        Matrix matrixTanpaB = new Matrix(m.getRowEff(), m.getRowEff());
+        Matrix matrixTanpaB = new Matrix(m.getRowEff(), m.getColEff() - 1);
         for (int i = 0; i < m.getRowEff(); i++) {
-            for (int j = 0; j < m.getRowEff(); j++) {
+            for (int j = 0; j < m.getColEff() - 1; j++) {
                 matrixTanpaB.setElmt(i, j, m.getElmt(i, j));
             }
         }

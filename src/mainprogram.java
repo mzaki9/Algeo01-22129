@@ -120,10 +120,8 @@ public class mainprogram {
                                 matrix = InputMatrix.inputMatrixKeyboard(scanner);
                             } else if (opsiInput == 2) {
                                 matrix = InputMatrix.inputFileMatrix(scanner);
-                                balikan = SPL.inverseMatrix(matrix);
                             } else if (opsiInput == 3) {
                                 matrix = InputMatrix.inputHilbert(scanner);
-                                balikan = SPL.inverseMatrix(matrix);
                             }
                             balikan = SPL.inverseMatrix(matrix);
 
@@ -133,15 +131,15 @@ public class mainprogram {
                                 System.out.println("1.iya");
                                 System.out.println("2.tidak");
                                 Tools.kirimOpsiSimpan();
-                                    int opsiHasil = scanner.nextInt();
-                                    if (opsiHasil == 1) {
-                                        String s = "Matrix hasil splnya adalah:\n"
-                                                + OutputMatrix.matrixToString(balikan);
-                                        OutputMatrix.TuliskeTxt(s);
-                                    }
+                                int opsiHasil = scanner.nextInt();
+                                if (opsiHasil == 1) {
+                                    String s = "Matrix hasil splnya adalah:\n"
+                                            + OutputMatrix.matrixToString(balikan);
+                                    OutputMatrix.TuliskeTxt(s);
+                                }
                                 Tools.pause();
                                 isMenu = true;
-                            }else{
+                            } else {
                                 Tools.pause();
                                 isMenu = true;
                             }
@@ -152,33 +150,45 @@ public class mainprogram {
                             System.out.println("1. Keyboard");
                             System.out.println("2. Input File");
                             System.out.println("3. Input Matrix Hilbert");
+                            Matrix cramer = null;
+                            Matrix matrix = null;
                             int opsiInput = scanner.nextInt();
                             if (opsiInput == 1) {
-                                Matrix matrix = InputMatrix.inputMatrixKeyboard(scanner);
-                                OutputMatrix.tulisSolusi(SPL.Cramer(matrix, false));
+                                matrix = InputMatrix.inputMatrixKeyboard(scanner);
 
                             } else if (opsiInput == 2) {
-                                Matrix matrix = InputMatrix.inputFileMatrix(scanner);
-                                OutputMatrix.tulisSolusi(SPL.Cramer(matrix, false));
+                                matrix = InputMatrix.inputFileMatrix(scanner);
+
                             } else if (opsiInput == 3) {
-                                Matrix matrix = InputMatrix.inputHilbert(scanner);
-                                OutputMatrix.tulisSolusi(SPL.Cramer(matrix, false));
+                                matrix = InputMatrix.inputHilbert(scanner);
+
+                            }
+                            cramer = SPL.Cramer(matrix, false);
+
+                            if (cramer != null) {
+                                OutputMatrix.tulisSolusi(cramer);
+                                System.out.println("Apakah jawaban mau disimpan?");
+                                System.out.println("1.iya");
+                                System.out.println("2.tidak");
+                                Tools.kirimOpsiSimpan();
+                                int opsiHasil = scanner.nextInt();
+                                if (opsiHasil == 1) {
+                                    String s = "Matrix hasil splnya adalah:\n"
+                                            + OutputMatrix.matrixToString(cramer);
+                                    OutputMatrix.TuliskeTxt(s);
+                                }
+                                Tools.pause();
+                                isMenu = true;
+                            } else {
+                                Tools.pause();
+                                isMenu = true;
                             }
 
-                            // Abis ini ada Info Mau dikirim hasilnya ke txt atau nggak, buat Andi
-                            System.out.println("Apakah jawaban mau disimpan?");
-                            System.out.println("1.iya");
-                            System.out.println("2.tidak");
-                            int opsiHasil = scanner.nextInt();
-                            // Mau input apapun(simpen dalam txt atau nggak), nanti balik ke Menu
-                            Tools.pause();
-                            isMenu = true;
                         }
 
                     }
 
                 }
-
             }
             // ===Determinan=====
             else if (opsiMenu == 2) {
