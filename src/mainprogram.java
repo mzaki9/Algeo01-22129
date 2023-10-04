@@ -399,14 +399,52 @@ public class mainprogram {
             else if (opsiMenu == 5) {
                 isMenu = false;
                 while (isMenu == false) {
-                    Tools.kirimOpsiMethod();
-                    int opsiMethod = scanner.nextInt();
                     System.out.println("Mau input matriks dalam bentuk apa?");
                     System.out.println("1. Keyboard");
                     System.out.println("2. Input File");
                     System.out.println("5.BALIK KE MENU");
+                    int opsiInput = scanner.nextInt();
+                    double x,y;
+                    Matrix m = new Matrix(4, 4);
+
+                     if (opsiInput == 1) {
+                        
+                        m = InputMatrix.inputMatrixKeyboard(scanner);
+                        while(m.getColEff() != 4 && m.getRowEff() != 4)
+                        {
+                           m = InputMatrix.inputMatrixKeyboard(scanner); 
+                        }
+                
+                        System.out.println("Masukkan nilai x : ");
+                        x = scanner.nextDouble();
+                        System.out.println("Masukkan nilai y : ");
+                        y = scanner.nextDouble();
+
+                        BicubicSpline.koeff(m, x, y);
+                        Tools.pause();
+                        isMenu = true;
+                    }
+                    if (opsiInput == 2) {
+                        Matrix input = InputMatrix.inputFileMatrix(scanner);
+
+                        for (int i = 0;i < 4;i++){
+                            for(int j = 0; j < 4; j++){
+                                m.setElmt(i, j, input.getElmt(i, j));
+                            }
+                        }
+
+                        x = input.getElmt(4, 0);
+                        y = input.getElmt(4, 1);
+
+                        BicubicSpline.koeff(m, x, y);
+                        
+                        Tools.pause();
+                        isMenu = true;
+                    }
+                    
+
                     // Balik Ke Menu
-                    if (opsiMethod == 5) {
+                    if (opsiInput == 5) {
                         Tools.pause();
                         isMenu = true;
                     }
@@ -453,7 +491,6 @@ public class mainprogram {
             }
             // ===Pembesaran Gambar dengan Bicubic SPline=====
             else if (opsiMenu == 7) {
-                Matrix matrix = InputMatrix.inputHilbert(scanner);
                 isMenu = false;
                 while (isMenu == false) {
                     System.out.println("5.BALIK KE MENU");

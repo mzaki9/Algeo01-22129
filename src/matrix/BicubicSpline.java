@@ -148,7 +148,8 @@ public class BicubicSpline {
         return value;
     }
 
-    public static void koeff(Matrix mat) {
+    public static void koeff(Matrix mat,double x,double y) {
+        
         Matrix koef = new Matrix(16, 16), temp = new Matrix(16, 16);
         Tools.copyMatrix(MatrixBalikan.GaussJordan(bikinKoef(temp)), koef);
         Matrix input = new Matrix(16, 1);
@@ -171,7 +172,7 @@ public class BicubicSpline {
         }
 
         // OutputMatrix.tulisMatrix(akhir);
-        System.out.println("HASIL : " + fspline(0.5, 0.5, akhir));
+        System.out.println("HASIL : " + fspline(x, y, akhir));
     }
 
     public static void fungsid(int bariskoef, Matrix D) {

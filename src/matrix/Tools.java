@@ -77,4 +77,28 @@ public class Tools
             return false;
         }
     }
+    public static boolean cekNoSolution(Matrix m)
+    // Cek apabila ditemukan pola tak ada solusi (di baris i semua 0 kecuali di
+    // kolomn akhir)
+    /*
+     * contoh 1 2 2 3
+     * 0 1 5 4
+     * 0 0 0 1
+     */
+    {
+        int j;
+
+        for (int i = 0; i < m.getRowEff(); i++) {
+
+            j = m.getColEff() - 2;
+            while (j >= 0 && m.getElmt(i, j) == 0) {
+                j--;
+            }
+            if (j == -1 && m.getElmt(i, m.getColEff() - 1) != 0) {
+                return true;
+            }
+        }
+        return false;
+
+    }
 }
