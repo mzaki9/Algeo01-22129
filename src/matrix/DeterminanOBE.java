@@ -2,20 +2,14 @@ package matrix;
 
 public class DeterminanOBE {
 
-    public static boolean isMatrixSquare(Matrix m)
-    {
-        return (m.getColEff() == m.getRowEff());
-    }
-
-    public static double getElmtDiagonal(Matrix m , int i)
-    {
-        return m.getElmt(i,i);
-    }
+    
 
     public static double determinanOBE(Matrix m)
+    //Menerima Matrix lalu mengolah menggunakan OBE dan menghasilkan matriks segitiga atas dan mengembalikan nilai determinannya.
     {
+
         double det = 1;
-        if(!(isMatrixSquare(m)))
+        if(!(Tools.isMatrixSquare(m)))
         {
             return 0;
         }
@@ -31,7 +25,7 @@ public class DeterminanOBE {
 
             for (i = 0; i < m.getRowEff(); i++) {
                 i2 = i;
-                while(getElmtDiagonal(m, i2) == 0&& i2 < m.getRowEff())
+                while(Tools.getElmtDiagonal(m, i2) == 0&& i2 < m.getRowEff())
                 {
                     
                     i2 ++;
@@ -45,7 +39,7 @@ public class DeterminanOBE {
                     det *= -1;
 
                     for (j = 0; j < m.getColEff(); j++) {
-                        SPL.swapBaris(m, i, i2);
+                        Tools.swapBaris(m, i, i2);
                     }
                 }
             }

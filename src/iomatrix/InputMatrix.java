@@ -20,6 +20,8 @@ public class InputMatrix {
         return dataXY;
     }
     public static Matrix  inputHilbert(Scanner scanner)
+    //I.S Menerima Scanner dari main
+    //F.S Mengembalikan nilai matrix dalam bentuk matrix hilbert dengan skala n, diinput dalam fungsi ini
     {
         System.out.print("Masukkan nilai n :  ");
         int n = scanner.nextInt();
@@ -35,7 +37,7 @@ public class InputMatrix {
     }
     public static void inputRegresiLinierKeyboard(Scanner scanner)
     // I.S Menerima scanner 
-    // F.S Mengembalikan matriks yang sudah diolah menjadi regresi 
+    // F.S Mengembalikan matriks yang sudah diolah menjadi regresi dengan input Keyboard
     {
         System.out.print("Mau berapa banyak peubah(var x)? (n) : ");
         int n = scanner.nextInt();
@@ -63,10 +65,10 @@ public class InputMatrix {
         SPL.createMatriksEselon(eEqualReg);
         SPL.createEselonTereduksi(eEqualReg);
         OutputMatrix.tulisMatrix(eEqualReg);
-        if(SPL.cekSolusiBanyak(eEqualReg) || SPL.cekNoSolution(eEqualReg) || SPL.Same1Utama(eEqualReg))
+        if(Tools.cekSolusiBanyak(eEqualReg) || Tools.cekNoSolution(eEqualReg) || Tools.Same1Utama(eEqualReg))
         {
             System.out.println("Tidak Ada Solusi!");
-            if(SPL.cekSolusiBanyak(eEqualReg) || SPL.Same1Utama(eEqualReg))
+            if(Tools.cekSolusiBanyak(eEqualReg) || Tools.Same1Utama(eEqualReg))
             {
                 System.out.println("Ditemukan 1 baris 0 semua,(Solusi Banyak)");
             }
@@ -102,6 +104,8 @@ public class InputMatrix {
 
     }
     public static void inputRegresiLinierFile(Scanner scanner)
+       // I.S Menerima scanner 
+    // F.S Mengembalikan matriks yang sudah diolah menjadi regresi dengan input file
     {
         Matrix matrix = inputFileMatrix(scanner);
         Matrix matriksRegresi = new Matrix(matrix.getRowEff()-1, matrix.getColEff());
@@ -118,10 +122,10 @@ public class InputMatrix {
         SPL.createMatriksEselon(eEqualReg);
         SPL.createEselonTereduksi(eEqualReg);
         OutputMatrix.tulisMatrix(eEqualReg);
-        if(SPL.cekSolusiBanyak(eEqualReg) || SPL.cekNoSolution(eEqualReg) || SPL.Same1Utama(eEqualReg))
+        if(Tools.cekSolusiBanyak(eEqualReg) || Tools.cekNoSolution(eEqualReg) || Tools.Same1Utama(eEqualReg))
         {
             System.out.println("Tidak Ada Solusi!");
-            if(SPL.cekSolusiBanyak(eEqualReg) || SPL.Same1Utama(eEqualReg))
+            if(Tools.cekSolusiBanyak(eEqualReg) || Tools.Same1Utama(eEqualReg))
             {
                 System.out.println("Ditemukan 1 baris 0 semua,(Solusi Banyak)");
             }
@@ -150,21 +154,13 @@ public class InputMatrix {
             }
             System.out.println("Dan Hampirannya adalah y =  " + hampy);
         }
-    
-
-
-
 
     }
 
-        
 
-
-
-    
-   
-    //tes
     public static Matrix inputMatrixKeyboard(Scanner scanner) {
+        //I.S Menerima Scanner
+        //F.S Mengembalikan Matrix dengan nilai elemen sesuai input keyboardnya
         int row,col;
         row = 0;
         col = 0;
@@ -206,6 +202,8 @@ public class InputMatrix {
      * Fungsi yang didelete  - inputNamaFileMatriks ->dipindah ke dalam inputFileMatriks biar lebih efisien
     */
     public static Matrix inputFileMatrix( Scanner scanner) {
+        //I.S Menerima Scanner
+        //F.S Mengembalikan Matrix dengan nilai elemen sesuai input filenya
         String filePath;
         Matrix matrix = new Matrix(0,0);
         do

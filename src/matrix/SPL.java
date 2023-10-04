@@ -4,38 +4,9 @@ import iomatrix.OutputMatrix;
 
 public class SPL {
 
-    public static void buat1Utama(Matrix m, int row)
-    // Menerima 1 baris dalam matrix, dan tentukan 1 utama serta dibagi dalam kolom
-    // "row tsb.
-    // Prekondisi : matrix sudah di cek apabila fungsi noSolution = false
-    {
-        int k = 0;
-        while (m.getElmt(row, k) == 0 && k < m.getColEff() - 1) {
-            k++;
-        }
-        double cons = m.getElmt(row, k);
-        if (m.getElmt(row, k) != 1 && cons != 0) {
-            for (int i = k; i < m.getColEff(); i++) {
-                double increment = m.Matrix[row][i] / cons;
-                m.Matrix[row][i] = increment;
-            }
-        }
+    
 
-        // mungkin dikanan nya ada nilai bukan 0
-
-    }
-
-    public static void swapBaris(Matrix m, int i1, int i2)
-    // tukar baris, misal baris 1 dengan 2
-    {
-        double temp;
-
-        for (int j = 0; j < m.getColEff(); j++) {
-            temp = m.getElmt(i1, j);
-            m.setElmt(i1, j, (m.getElmt(i2, j)));
-            m.setElmt(i2, j, (temp));
-        }
-    }
+    
 
     public static void OBEBarisPlusMinusFaseMaju(Matrix m, int i1, int j1, int i2) {
         // kurangi seluruh baris i1 dengan i2, dengan konstanta key1/key2 dengan key
@@ -80,94 +51,7 @@ public class SPL {
 
     }
 
-    public static boolean cekNoSolution(Matrix m)
-    // Cek apabila ditemukan pola tak ada solusi (di baris i semua 0 kecuali di
-    // kolomn akhir)
-    /*
-     * contoh 1 2 2 3
-     * 0 1 5 4
-     * 0 0 0 1
-     */
-    {
-        int j;
-
-        for (int i = 0; i < m.getRowEff(); i++) {
-
-            j = m.getColEff() - 2;
-            while (j >= 0 && m.getElmt(i, j) == 0) {
-                j--;
-            }
-            if (j == -1 && m.getElmt(i, m.getColEff() - 1) != 0) {
-                return true;
-            }
-        }
-        return false;
-
-    }
-
-    public static boolean cekSolusiBanyak(Matrix m)
-    // Return true apabila ditemukan 1 baris berisi 0 semua
-    {
-        int count;
-        for (int i = 0; i < m.getRowEff(); i++) {
-            count = 0;
-            for (int j = 0; j < m.getColEff(); j++) {
-                if (m.getElmt(i, j) == 0) {
-                    count++;
-                }
-            }
-            if (count == m.getColEff()) {
-                return true;
-            }
-        }
-        return false;
-
-    }
-
-    public static int getBarisSama(Matrix m, int row)
-    // Mengembalikan baris ke berapa yang isi elemen sama persis dengan baris "row"
-    // Bila tidak ditemukan, return baris yang sama dengan row
-    {
-        int count;
-        for (int i = 0; i < m.getRowEff(); i++) {
-            count = 0;
-            for (int j = 0; j < m.getColEff(); j++) {
-                if (m.getElmt(i, j) == m.getElmt(row, j) && row != i) {
-                    count++;
-                }
-            }
-            if (count == m.getColEff()) {
-                return i;
-            }
-        }
-        return row;
-    }
-
-    public static void delBarisSama(Matrix m)
-    // baris yang diketahui sama, salah satu nya dibuat jadi 0
-    {
-        for (int i = 0; i < m.getRowEff(); i++) {
-            if (getBarisSama(m, i) != i) {
-                for (int j = 0; j < m.getColEff(); j++) {
-
-                    m.setElmt(i, j, 0);
-
-                }
-            }
-        }
-    }
-
-    public static boolean cekBarisUnik(Matrix m, int row)
-    // mengembalikan nilai true apabila baris itu hasil unik / koefisien 1
-    {
-        int count = 0;
-        for (int j = 0; j < m.getColEff() - 1; j++) {
-            if (m.getElmt(row, j) == 0) {
-                count++;
-            }
-        }
-        return (count == m.getColEff() - 2);
-    }
+    
 
     public static Matrix createMatriksEselon(Matrix m) {
         // Prekondisi: tidak ada 1 kolom yang 0 semua / koefisien trash
@@ -181,32 +65,32 @@ public class SPL {
             i++;
         }
         if (i != m.getRowEff()) {
-            swapBaris(m, 0, i);
+            Tools.swapBaris(m, 0, i);
         }
 
         if (i1 != m.getRowEff() && m.getElmt(0, 0) != 1) {
-            swapBaris(m, 0, i1);
+            Tools.swapBaris(m, 0, i1);
         }
 
-        buat1Utama(m, 0);
+        Tools.buat1Utama(m, 0);
 
         int batasAugmented = m.getColEff() - 1;
         int k = 1;
         // Mulai algoritma Gauss
         for (int j = 0; j < batasAugmented; j++) {
             for (i = 1 + j; i < m.getRowEff(); i++) {
-                if (cekBarisUnik(m, i) == false) {
+                if (Tools.cekBarisUnik(m, i) == false) {
                     OBEBarisPlusMinusFaseMaju(m, i, j, j);
                 }
             }
             if (k < m.getRowEff()) {
-                buat1Utama(m, k);
+                Tools.buat1Utama(m, k);
             }
             k++;
         }
         // Kalau ada yang sama barisnya, dibuat 0 slaah satu, untuk mempermudah
         // perhitungan nantinya
-        delBarisSama(m);
+        Tools.delBarisSama(m);
         return m;
 
     }
@@ -289,9 +173,9 @@ public class SPL {
 
                     // apabila ditemukan 0 dan kolom j tidak sama dengan kolom j1utama, ATAU j1utama
                     // berada di akhir
-                    if (j != j1utama && m.getElmt(i, j) != 0 || cekBarisUnik(m, i)) {
+                    if (j != j1utama && m.getElmt(i, j) != 0 || Tools.cekBarisUnik(m, i)) {
 
-                        if (!(cekBarisUnik(m, i))) {
+                        if (!(Tools.cekBarisUnik(m, i))) {
                             if ((-1) * m.getElmt(i, j) > 0) {
                                 if (ans[j1utama] != "") {
                                     ans[j1utama] += "+ ";
@@ -338,26 +222,7 @@ public class SPL {
         return ans;
     }
 
-    public static boolean Same1Utama(Matrix m) {
-        // Mengembalikan nilai TRUE apabila ditemukan 1 utama yang lebih dari 1 dalam 1
-        // kolom(berarti tidak ada solusi)
-
-        boolean cek;
-        for (int j = 0; j < m.getColEff() - 1; j++) {
-
-            cek = false;
-            for (int i = 0; i < m.getRowEff(); i++) {
-                // cek 1 utama
-                if (m.getElmt(i, j) == 1 && cek == false) {
-                    cek = true;
-                } else if (m.getElmt(i, j) == 1 && cek == true) {
-                    return true;
-                }
-            }
-        }
-        return false;
-
-    }
+    
 
     public static Matrix inverseMatrix(Matrix m) {
         int n = m.getRowEff();

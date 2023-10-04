@@ -1,6 +1,5 @@
 package matrix;
 import iomatrix.*;
-import java.util.Scanner;
 public class Kofaktor {
    
     // Fungsi untuk menghitung determinan matrix

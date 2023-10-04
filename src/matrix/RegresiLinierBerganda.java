@@ -6,6 +6,7 @@ public class RegresiLinierBerganda {
     
     public static Matrix regresiGanda(Matrix m)
     //Prekondisi : Menerima matriks yang sudah berbentuk data regresi linier
+    //Mengembalikan Matrix eEquation(matriks yang sudah diolah dengan Rumus Normal Equation)
     {
         Matrix eEquation = new Matrix(m.getColEff(),m.getColEff() + 1);
         for (int k= 0; k < eEquation.getRowEff(); k++) {
@@ -62,6 +63,7 @@ public class RegresiLinierBerganda {
 
     }
     public static double sumKolom(Matrix m,int col)
+    //Sigma dalam rumus Normal Equation, menjumlahkan seluruh baris dalam col tersebut
     {
         double sum = 0;
         for (int i= 0; i < m.getRowEff(); i++) {

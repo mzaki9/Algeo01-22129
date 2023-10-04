@@ -127,4 +127,130 @@ public class Tools
 
         return matrixTanpaB;
     }
+    public static void buat1Utama(Matrix m, int row)
+    // Menerima 1 baris dalam matrix, dan tentukan 1 utama serta dibagi dalam kolom
+    // "row tsb.
+    // Prekondisi : matrix sudah di cek apabila fungsi noSolution = false
+    {
+        int k = 0;
+        while (m.getElmt(row, k) == 0 && k < m.getColEff() - 1) {
+            k++;
+        }
+        double cons = m.getElmt(row, k);
+        if (m.getElmt(row, k) != 1 && cons != 0) {
+            for (int i = k; i < m.getColEff(); i++) {
+                double increment = m.Matrix[row][i] / cons;
+                m.Matrix[row][i] = increment;
+            }
+        }
+
+        // mungkin dikanan nya ada nilai bukan 0
+
+    }
+    public static void swapBaris(Matrix m, int i1, int i2)
+    // Prosedur menukar nilai baris i1 dengan i2, i2 menjadi i1
+    {
+        double temp;
+
+        for (int j = 0; j < m.getColEff(); j++) {
+            temp = m.getElmt(i1, j);
+            m.setElmt(i1, j, (m.getElmt(i2, j)));
+            m.setElmt(i2, j, (temp));
+        }
+    }
+    public static boolean Same1Utama(Matrix m) {
+        // Mengembalikan nilai TRUE apabila ditemukan 1 utama yang lebih dari 1 dalam 1
+        // kolom(berarti tidak ada solusi)
+
+        boolean cek;
+        for (int j = 0; j < m.getColEff() - 1; j++) {
+
+            cek = false;
+            for (int i = 0; i < m.getRowEff(); i++) {
+                // cek 1 utama
+                if (m.getElmt(i, j) == 1 && cek == false) {
+                    cek = true;
+                } else if (m.getElmt(i, j) == 1 && cek == true) {
+                    return true;
+                }
+            }
+        }
+        return false;
+        
+
+    }
+   
+    public static boolean cekSolusiBanyak(Matrix m)
+    // Return true apabila ditemukan 1 baris berisi 0 semua
+    {
+        int count;
+        for (int i = 0; i < m.getRowEff(); i++) {
+            count = 0;
+            for (int j = 0; j < m.getColEff(); j++) {
+                if (m.getElmt(i, j) == 0) {
+                    count++;
+                }
+            }
+            if (count == m.getColEff()) {
+                return true;
+            }
+        }
+        return false;
+
+    }
+    public static int getBarisSama(Matrix m, int row)
+    // Mengembalikan baris ke berapa yang isi elemen sama persis dengan baris "row"
+    // Bila tidak ditemukan, return baris yang sama dengan row
+    {
+        int count;
+        for (int i = 0; i < m.getRowEff(); i++) {
+            count = 0;
+            for (int j = 0; j < m.getColEff(); j++) {
+                if (m.getElmt(i, j) == m.getElmt(row, j) && row != i) {
+                    count++;
+                }
+            }
+            if (count == m.getColEff()) {
+                return i;
+            }
+        }
+        return row;
+    }
+    public static void delBarisSama(Matrix m)
+    // baris yang diketahui sama, salah satu nya dibuat jadi 0
+    {
+        for (int i = 0; i < m.getRowEff(); i++) {
+            if (getBarisSama(m, i) != i) {
+                for (int j = 0; j < m.getColEff(); j++) {
+
+                    m.setElmt(i, j, 0);
+
+                }
+            }
+        }
+    }
+    public static boolean cekBarisUnik(Matrix m, int row)
+    // mengembalikan nilai true apabila baris itu hasil unik / koefisien 1
+    {
+        int count = 0;
+        for (int j = 0; j < m.getColEff() - 1; j++) {
+            if (m.getElmt(row, j) == 0) {
+                count++;
+            }
+        }
+        return (count == m.getColEff() - 2);
+    }
+    public static boolean isMatrixSquare(Matrix m)
+    //Mengembalikan TRUE apabila matriks berbentuk kotak(row=eff)
+    {
+        return (m.getColEff() == m.getRowEff());
+    }
+
+    public static double getElmtDiagonal(Matrix m , int i)
+    //Mengembalikan nilai elemen diagonal dari matriks m
+    {
+        return m.getElmt(i,i);
+    }
+
+
 }

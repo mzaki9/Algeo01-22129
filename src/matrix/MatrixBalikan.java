@@ -35,7 +35,7 @@ public class MatrixBalikan {
                 }
 
                 if (swapRow != -1) {
-                    SPL.swapBaris(augmentedMatrix, i, swapRow);
+                    Tools.swapBaris(augmentedMatrix, i, swapRow);
 
                 } else {
                     System.out.println("Matrix tidak mempunyai balikan");
