@@ -7,9 +7,9 @@ import java.util.Scanner;
 
 public class InterpolasiPolinomial {
 
-    public static void Interpolasi(Matrix m, boolean isFile) {
+    public static Matrix Interpolasi(Matrix m, boolean isFile) {
         double x = 0;
-        double result = 0;
+        Matrix result = new Matrix(1, 1);
         Matrix augMatrix = null;
 
         if(isFile){
@@ -32,15 +32,21 @@ public class InterpolasiPolinomial {
         }
 
         
-        Matrix hasil = new Matrix(augMatrix.getRowEff(), 1);
-        Tools.copyMatrix(SPL.Cramer(augMatrix, true), hasil);
-        OutputMatrix.tulisSolusiInterpolasiP(SPL.Cramer(augMatrix, true));
+        Matrix hasil = null;
+        hasil = SPL.Cramer(augMatrix);
+        if (hasil == null){
+            return null;
+        }
+        //Tools.copyMatrix(SPL.Cramer(augMatrix), hasil);
+        OutputMatrix.tulisSolusiInterpolasiP(hasil);
 
-
+        double temp = 0;
         for (int i = 0; i < hasil.getRowEff(); i++) {
-                result += hasil.getElmt(i, 0) * Math.pow(x, i);
+                temp += hasil.getElmt(i, 0) * Math.pow(x, i);
             }
-        System.out.println("Hasilnya adalah: " + result);
+        System.out.println("Hasilnya adalah: " + temp);
+        result.setElmt(0, 0, temp);
+        return result;
 
     }
 

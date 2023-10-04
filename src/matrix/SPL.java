@@ -258,11 +258,11 @@ public class SPL {
 
     }
 
-    public static Matrix Cramer(Matrix m, Boolean isInterpolasi) {
+    public static Matrix Cramer(Matrix m) {
 
         // Check Cramer
-        if (m.getRowEff() == m.getColEff()) {
-            System.out.println("Matrix tidak valid");
+        if (m.getRowEff() == m.getColEff() || (m.getRowEff() > m.getColEff())) {
+            System.out.println("Matrix tidak valid untuk metode ini");
             return null;
         }
 
@@ -274,6 +274,7 @@ public class SPL {
         // Tools.copyMatrix(matrixWithoutB(m), matrix);
 
         double determinan = Kofaktor.hitungDeterminan(matrix);
+        System.out.println(determinan);
         if (determinan == 0) {
             System.out.println("Determinan matriks adalah nol, tidak ada solusi atau solusi tidak unik.");
             return null;

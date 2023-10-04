@@ -127,9 +127,6 @@ public class mainprogram {
 
                             if (balikan != null) {
                                 // Abis ini ada Info Mau dikirim hasilnya ke txt atau nggak, buat Andi
-                                System.out.println("Apakah jawaban mau disimpan?");
-                                System.out.println("1.iya");
-                                System.out.println("2.tidak");
                                 Tools.kirimOpsiSimpan();
                                 int opsiHasil = scanner.nextInt();
                                 if (opsiHasil == 1) {
@@ -163,13 +160,10 @@ public class mainprogram {
                                 matrix = InputMatrix.inputHilbert(scanner);
 
                             }
-                            cramer = SPL.Cramer(matrix, false);
+                            cramer = SPL.Cramer(matrix);
 
                             if (cramer != null) {
                                 OutputMatrix.tulisSolusi(cramer);
-                                System.out.println("Apakah jawaban mau disimpan?");
-                                System.out.println("1.iya");
-                                System.out.println("2.tidak");
                                 Tools.kirimOpsiSimpan();
                                 int opsiHasil = scanner.nextInt();
                                 if (opsiHasil == 1) {
@@ -372,20 +366,30 @@ public class mainprogram {
                     System.out.println("2. Input File");
                     System.out.println("5.BALIK KE MENU");
                     int opsiMethod = scanner.nextInt();
-
+                    Matrix hasil = null;
                     // Opsi Input Keyboard
                     if (opsiMethod == 1) {
                         Matrix matrix = InputMatrix.inputInterpolasi(scanner);
-                        InterpolasiPolinomial.Interpolasi(matrix, false);
-
+                        hasil = InterpolasiPolinomial.Interpolasi(matrix, false);
                         Tools.pause();
                         isMenu = true;
                     }
                     if (opsiMethod == 2) {
                         Matrix matrix = InputMatrix.inputFileMatrix(scanner);
-                        InterpolasiPolinomial.Interpolasi(matrix, true);
+                        hasil = InterpolasiPolinomial.Interpolasi(matrix, true);
                         Tools.pause();
                         isMenu = true;
+                    }
+                    if (hasil != null){
+                        Tools.kirimOpsiSimpan();
+                            int opsiHasil = scanner.nextInt();
+                            if (opsiHasil == 1) {
+                                String s = "Hasilnya untuk nilai x yand diuji adalah :\n"
+                                        + OutputMatrix.matrixToString(hasil);
+                                OutputMatrix.TuliskeTxt(s);
+                            }
+                            Tools.pause();
+                            isMenu = true;
                     }
 
                     // Balik Ke Menu
