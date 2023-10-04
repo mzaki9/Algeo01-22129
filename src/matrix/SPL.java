@@ -368,11 +368,11 @@ public class SPL {
         }
 
         Matrix matrixTanpaB = new Matrix(n, n);
-        Matrix b = extractB(m);
+        Matrix b = Tools.extractB(m);
         Matrix hasil = new Matrix(m.getRowEff(), m.getRowEff());
         Matrix x = new Matrix(hasil.getRowEff(), 1);
 
-        matrixTanpaB = matrixWithoutB(m);
+        matrixTanpaB = Tools.matrixWithoutB(m);
         hasil = MatrixBalikan.GaussJordan(matrixTanpaB);
         if (hasil != null) {
             // X = hasil^-1 * b
@@ -403,9 +403,9 @@ public class SPL {
 
         Matrix matrix = null;
 
-        Matrix b = extractB(m); // Ambil "b" dari matrix original
+        Matrix b = Tools.extractB(m); // Ambil "b" dari matrix original
 
-        matrix = matrixWithoutB(m);
+        matrix = Tools.matrixWithoutB(m);
         // Tools.copyMatrix(matrixWithoutB(m), matrix);
 
         double determinan = Kofaktor.hitungDeterminan(matrix);
@@ -429,30 +429,8 @@ public class SPL {
         return x;
     }
 
-    public static Matrix matrixWithoutB(Matrix m) {
-        // Function ini tidak mengambil nilali "b" dari matrix original
+   
 
-        Matrix matrixTanpaB = new Matrix(m.getRowEff(), m.getColEff() - 1);
-        for (int i = 0; i < m.getRowEff(); i++) {
-            for (int j = 0; j < m.getColEff() - 1; j++) {
-                matrixTanpaB.setElmt(i, j, m.getElmt(i, j));
-            }
-        }
-
-        return matrixTanpaB;
-    }
-
-    public static Matrix extractB(Matrix m) {
-        // Function ini mengambil nilai "b" dari matrix
-
-        Matrix b = new Matrix(m.getRowEff(), 1);
-        // Ambil "b" dari matrix original
-        for (int i = 0; i < m.getRowEff(); i++) {
-            double bValue = m.getElmt(i, m.getColEff() - 1);
-            b.setElmt(i, 0, bValue);
-        }
-
-        return b;
-    }
+    
 
 }

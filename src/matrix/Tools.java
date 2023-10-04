@@ -101,4 +101,30 @@ public class Tools
         return false;
 
     }
+
+    public static Matrix extractB(Matrix m) {
+        // Function ini mengambil nilai "b" dari matrix
+
+        Matrix b = new Matrix(m.getRowEff(), 1);
+        // Ambil "b" dari matrix original
+        for (int i = 0; i < m.getRowEff(); i++) {
+            double bValue = m.getElmt(i, m.getColEff() - 1);
+            b.setElmt(i, 0, bValue);
+        }
+
+        return b;
+    }
+
+    public static Matrix matrixWithoutB(Matrix m) {
+        // Function ini tidak mengambil nilali "b" dari matrix original
+
+        Matrix matrixTanpaB = new Matrix(m.getRowEff(), m.getColEff() - 1);
+        for (int i = 0; i < m.getRowEff(); i++) {
+            for (int j = 0; j < m.getColEff() - 1; j++) {
+                matrixTanpaB.setElmt(i, j, m.getElmt(i, j));
+            }
+        }
+
+        return matrixTanpaB;
+    }
 }
