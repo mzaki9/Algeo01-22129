@@ -1,13 +1,4 @@
 package matrix;
-import java.io.File;
-import java.io.IOException;
-import javax.imageio.ImageIO;
-
-import iomatrix.OutputMatrix;
-
-import java.awt.image.BufferedImage;
-
-
 //TES
 public class BicubicSpline {
 
@@ -327,7 +318,7 @@ public class BicubicSpline {
         Matrix koefX = new Matrix(16, 16), tempX = new Matrix(16, 16);
         Tools.copyMatrix(MatrixBalikan.GaussJordan(bikinKoef(tempX)), koefX);
         Matrix XD = new Matrix(16, 16);
-        Tools.copyMatrix(Kofaktor.DividebyCons(Tools.multiplyMatrix(koefX,koefD),4),XD);
+        Tools.copyMatrix(Tools.DividebyCons(Tools.multiplyMatrix(koefX,koefD),4),XD);
         Matrix input = new Matrix(16,1), hasil = new Matrix(16,1), akhir = new Matrix(4,4);
         for (int i = 0; i < matrix.getRowEff(); i++) {
             for (int j = 0; j < matrix.getColEff(); j++) {

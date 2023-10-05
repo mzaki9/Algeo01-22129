@@ -1,11 +1,27 @@
 package matrix;
 
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
+
 import javax.imageio.ImageIO;
 
 public class ImageUpscale {
+    static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+    public static String dir = "../test";
+    public static void pathMaker() {
+        String directory = System.getProperty("user.dir");
+        directory = directory.substring(directory.lastIndexOf("\\") + 1);
+        if (directory.equals("bin")) {
+            dir = "..\\test\\";
+        } else {
+            dir = "test\\";
+        }
+    }
+
     public static Matrix matrixpojok(int height, int width, BufferedImage image) {
         Matrix dasar = new Matrix(4, 4);
         if (width == 0 && height == 0) {
@@ -14,11 +30,11 @@ public class ImageUpscale {
                     dasar.setElmt(i, j, image.getRGB(j, i));
                 }
             }
-            // dasar.setElmt(0, 0, dasar.getElmt(1, 1));
-            // for (int i =1 ; i<4;i++){
-            //     dasar.setElmt(0, i, dasar.getElmt(0, i));
-            //     dasar.setElmt(i, 0, dasar.getElmt(0, i));
-            // }
+            dasar.setElmt(0, 0, dasar.getElmt(1, 1));
+            for (int i =1 ; i<4;i++){
+                dasar.setElmt(0, i, dasar.getElmt(0, i));
+                dasar.setElmt(i, 0, dasar.getElmt(0, i));
+            }
             
         } else if (width == image.getWidth() - 1 && height == 0) {
             for (int i = 0; i < 4; i++) {
@@ -66,26 +82,25 @@ public class ImageUpscale {
                 }
             }
         } else if (width == 0) {
-            if (height == 0) {
+            if (height == image.getHeight() - 2) {
                 for (int i = 0; i < 4; i++) {
-                    for (int j = 0; j < 4; j++) {
-                        dasar.setElmt(i, j, image.getRGB(j, i));
-                    }
-                }
-            } else if (height == image.getHeight() - 2) {
-                for (int i = 0; i < 4; i++) {
-                    for (int j = 0; j < 4; j++) {
+                    for (int j = 1; j < 4; j++) {
                         dasar.setElmt(i, j, image.getRGB(j, height - 2 + i));
                     }
                 }
+                for (int i = 0; i < 4; i++) {
+                    dasar.setElmt(0, i, dasar.getElmt(1,i));
+                }
             } else {
                 for (int i = 0; i < 4; i++) {
-                    for (int j = 0; j < 4; j++) {
+                    for (int j = 1; j < 4; j++) {
                         dasar.setElmt(i, j, image.getRGB(j, height - 1 + i));
                     }
                 }
+                for (int i = 0; i < 4; i++) {
+                    dasar.setElmt(0, i, dasar.getElmt(1,i));}
             }
-        } else if (height == image.getHeight() - 1) {
+            } else if (height == image.getHeight() - 1) {
             if (width == 0) {
                 for (int i = 0; i < 4; i++) {
                     for (int j = 0; j < 4; j++) {
@@ -106,24 +121,24 @@ public class ImageUpscale {
                 }
             }
         } else if (width == image.getWidth() - 1) {
-            if (height == 0) {
+            
+            if (height == image.getHeight() - 2) {
                 for (int i = 0; i < 4; i++) {
-                    for (int j = 0; j < 4; j++) {
-                        dasar.setElmt(i, j, image.getRGB(width - 3 + j, i));
-                    }
-                }
-            } else if (height == image.getHeight() - 2) {
-                for (int i = 0; i < 4; i++) {
-                    for (int j = 0; j < 4; j++) {
+                    for (int j = 1; j < 4; j++) {
                         dasar.setElmt(i, j, image.getRGB(width - 3 + j, height - 2 + i));
                     }
                 }
+                for (int i = 0; i < 4; i++) {
+                    dasar.setElmt(0, i, dasar.getElmt(1,i));
+                 }
             } else {
                 for (int i = 0; i < 4; i++) {
-                    for (int j = 0; j < 4; j++) {
+                    for (int j = 1; j < 4; j++) {
                         dasar.setElmt(i, j, image.getRGB(width - 3 + j, height - 1 + i));
                     }
                 }
+                for (int i = 0; i < 4; i++) {
+                    dasar.setElmt(0, i, dasar.getElmt(1,i));}
             }
         }
 
@@ -211,32 +226,43 @@ public class ImageUpscale {
         return Ipixel;
     }
 
-    public static void main(String[] args) {
+    public static void ImageUps() {
         try {
+            pathMaker();
             // Load the image
-            BufferedImage inputImage = ImageIO.read(new File("input.png"));
-
-            int newWidth = 4 * inputImage.getWidth();
-            int newHeight = 4 * inputImage.getHeight();
+            System.out.println("Masukkan nama file : ");
+            String name = reader.readLine();
+            BufferedImage inputImage = ImageIO.read(new File(dir + name));
+            System.out.println("Masukkan perbesaran : ");
+            String input = reader.readLine();
+            int s = Integer.parseInt(input);
+            int newWidth = s * inputImage.getWidth();
+            int newHeight = s * inputImage.getHeight();
             BufferedImage interpolatedImage = new BufferedImage(newWidth, newHeight, inputImage.getType());
-
+            System.out.println("Mohon menunggu, image sedang diproses");
             for (int i = 0; i < newHeight; i++) {
                 for (int j = 0; j < newWidth; j++) {
-                    double y = (double) j / 4;
-                    double x = (double) i / 4;
+                    double y = (double) j / s;
+                    double x = (double) i / s;
 
                     int Ipixel = bicubicInterpolate(inputImage, x, y);
                     interpolatedImage.setRGB(j, i, Ipixel);
                 }
                 try {
-                    ImageIO.write(interpolatedImage, "png", new File("output.png"));
+                    ImageIO.write(interpolatedImage, "png", new File(dir+"output.png"));
                 } catch (IOException e) {
                     e.printStackTrace();
-                }
+                } 
             }
-
+            System.out.println("Image berhasil diperbesar");
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        } finally {
+            try {
+                reader.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+    }
     }
 }

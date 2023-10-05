@@ -61,6 +61,7 @@ public class Tools
             System.out.println("\nTekan apapun untuk melanjutkan...");
             Scanner scanner = new Scanner(System.in);
             scanner.nextLine();
+            scanner.close();
             System.out.print("\033[H\033[2J");
             System.out.flush();
     }
@@ -252,5 +253,24 @@ public class Tools
         return m.getElmt(i,i);
     }
 
+    public static Matrix DividebyCons(Matrix matrix, double x){
+        for (int i = 0; i < matrix.getRowEff(); i++) {
+            for (int j = 0; j < matrix.getColEff(); j++) {
+                matrix.setElmt(i,j, matrix.getElmt(i, j)/x);
+            }
+        }
+            
+        return matrix;
+    }
 
+    public static Matrix Transpose(Matrix matrix){
+        int n=matrix.getRowEff();
+        Matrix Transpose = new Matrix(n,n);
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                Transpose.setElmt(j, i, matrix.getElmt(i, j));
+            }
+        }
+        return Transpose;
+    }
 }

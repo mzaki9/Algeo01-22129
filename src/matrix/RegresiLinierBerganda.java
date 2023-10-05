@@ -1,7 +1,5 @@
 package matrix;
 
-import iomatrix.OutputMatrix;
-
 public class RegresiLinierBerganda {
     
     public static Matrix regresiGanda(Matrix m)

@@ -2,7 +2,6 @@ package iomatrix;
 import java.io.*;
 import javax.swing.JOptionPane;
 import matrix.Matrix;
-import matrix.SPL;
 import matrix.Tools;
 
 

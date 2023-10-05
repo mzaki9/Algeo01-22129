@@ -29,6 +29,7 @@ public class InterpolasiPolinomial {
             System.out.println("Masukkan Nilai X untuk Diuji :");
             Scanner scanner = new Scanner(System.in);
             x = scanner.nextDouble();
+            scanner.close();
         }
 
         

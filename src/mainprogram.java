@@ -496,17 +496,11 @@ public class mainprogram {
             // ===Pembesaran Gambar dengan Bicubic SPline=====
             else if (opsiMenu == 7) {
                 isMenu = false;
-                while (isMenu == false) {
-                    System.out.println("5.BALIK KE MENU");
-                    int opsiMethod = scanner.nextInt();
-
-                    // Balik Ke Menu
-                    if (opsiMethod == 5) {
-
-                        Tools.pause();
-                        isMenu = true;
-                    }
-                }
+            
+                ImageUpscale.ImageUps();
+                Tools.pause();
+                isMenu = true;
+            
 
             }
             // Error handler

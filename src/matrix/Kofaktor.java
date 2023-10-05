@@ -71,33 +71,13 @@ public class Kofaktor {
         return matkof;
     }
 
-    public static Matrix Transpose(Matrix matrix){
-        int n=matrix.getRowEff();
-        Matrix Transpose = new Matrix(n,n);
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                Transpose.setElmt(j, i, matrix.getElmt(i, j));
-            }
-        }
-        return Transpose;
-    }
-
-    public static Matrix DividebyCons(Matrix matrix, double x){
-        for (int i = 0; i < matrix.getRowEff(); i++) {
-            for (int j = 0; j < matrix.getColEff(); j++) {
-                matrix.setElmt(i,j, matrix.getElmt(i, j)/x);
-            }
-        }
-            
-        return matrix;
-    }
 
     public static Matrix InverseKofaktor(Matrix matrix) {
         int n = matrix.getRowEff();
         Matrix inverse = new Matrix(n,n), adjoin=new Matrix(n,n);
         double det = hitungDeterminan(matrix);
-        adjoin=Transpose(MatrixKofaktor(matrix));
-        inverse=DividebyCons(adjoin,det);
+        adjoin=Tools.Transpose(MatrixKofaktor(matrix));
+        inverse=Tools.DividebyCons(adjoin,det);
         return inverse;
     }
 
