@@ -260,6 +260,13 @@ public class mainprogram {
                                 // Kirim hasil
                                 Tools.kirimOpsiSimpan();
                                 int opsiHasil = scanner.nextInt();
+                                if (opsiHasil == 1)
+                                {
+                                    String s = "Determinanya adalah " + DeterminanOBE.determinanOBE(matrix) + "\n";
+                                    OutputMatrix.TuliskeTxt(s);
+                                    System.exit(0);
+
+                                }
                                 isMenu = true;
                             } else if (opsiInput == 2) {
                                 Matrix matrix = InputMatrix.inputFileMatrix(scanner);
@@ -268,6 +275,13 @@ public class mainprogram {
                                 // Kirim hasil
                                 Tools.kirimOpsiSimpan();
                                 int opsiHasil = scanner.nextInt();
+                                if (opsiHasil == 1)
+                                {
+                                    String s = "Determinanya adalah " + DeterminanOBE.determinanOBE(matrix) + "\n";
+                                    OutputMatrix.TuliskeTxt(s);
+                                    System.exit(0);
+
+                                }
                                 isMenu = true;
                             } else {
                                 System.out.println("Tidak valid! balik ke menu");
