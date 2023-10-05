@@ -217,7 +217,11 @@ public class ImageUpscale {
         red += (int) BicubicSpline.spline(merah, x - tinggi, y - lebar);
         green += (int) BicubicSpline.spline(hijau, x - tinggi, y - lebar);
         blue += (int) BicubicSpline.spline(biru, x - tinggi, y - lebar);
-
+        if (Ipixel>255){
+            Ipixel = 255;
+        } else if (Ipixel<0){
+            Ipixel = 0;
+        }
         Ipixel = (0xFF << 24) |
                 ((int) Math.round(red) << 16) |
                 ((int) Math.round(green) << 8) |
