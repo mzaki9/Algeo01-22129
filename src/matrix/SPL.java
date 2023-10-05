@@ -221,6 +221,76 @@ public class SPL {
         }
         return ans;
     }
+    public static String[] solutionGauss(Matrix m)
+    
+    {
+        int j1utama;
+        String[] ans = new String[m.getColEff() - 1];
+        for (int k = 0; k < ans.length; k++) {
+            ans[k] = "";
+        }
+        int batasAugmented = m.getColEff() - 1;
+        for (int i = 0; i < m.getRowEff(); i++) {
+            boolean cekb = false;
+            j1utama = 0;
+
+            // Mencari kolom dari 1 utama
+            while (m.getElmt(i, j1utama) != 1 && j1utama < batasAugmented) {
+                j1utama++;
+            }
+            if (j1utama != batasAugmented) {
+                for (int j = 0; j < batasAugmented; j++) {
+
+                    // apabila ditemukan 0 dan kolom j tidak sama dengan kolom j1utama, ATAU j1utama
+                    // berada di akhir
+                    if (j != j1utama && m.getElmt(i, j) != 0 || Tools.cekBarisUnik(m, i)) {
+
+                        if (!(Tools.cekBarisUnik(m, i))) {
+                            if ((-1) * m.getElmt(i, j) > 0) {
+                                if (ans[j1utama] != "") {
+                                    ans[j1utama] += "+ ";
+                                }
+                                ans[j1utama] += Double.toString((-1) * m.getElmt(i, j)) + "R" + Integer.toString(j + 1)
+                                        + " ";
+                            } else {
+                                ans[j1utama] += "- " + Double.toString(m.getElmt(i, j)) + "R" + Integer.toString(j + 1)
+                                        + " ";
+                            }
+                        }
+
+                        // Memasukkan nilai b di akhir persamaan
+                        if (m.getElmt(i, batasAugmented) > 0 && cekb == false && j == batasAugmented - 1) // j ==
+                                                                                                          // batasaugmented
+                                                                                                          // - 1 agar
+                                                                                                          // penempatan
+                                                                                                          // si B di
+                                                                                                          // akhir
+                                                                                                          // persamaan.
+                        {
+                            if (ans[j1utama] != "") {
+                                ans[j1utama] += "+ ";
+                            }
+                            ans[j1utama] += Double.toString(m.getElmt(i, batasAugmented));
+                            cekb = true;
+                        } else if (m.getElmt(i, batasAugmented) < 0 && cekb == false && j == batasAugmented - 1)// apabila
+                                                                                                                // b di
+                                                                                                                // akhir
+                                                                                                                // negatif
+                        {
+                            if (ans[j1utama] != "") {
+                                ans[j1utama] += "";
+                            }
+                            ans[j1utama] += Double.toString(m.getElmt(i, batasAugmented));
+                            cekb = true;
+                        }
+
+                    }
+                }
+
+            }
+        }
+        return ans;
+    }
 
     
 

@@ -51,28 +51,31 @@ public class mainprogram {
                             System.out.println("2. Input File");
                             System.out.println("3. Input Matrix Hilbert");
                             int opsiInput = scanner.nextInt();
+                            String s = "";
                             if (opsiInput == 1) {
                                 Matrix matrix = InputMatrix.inputMatrixKeyboard(scanner);
                                 SPL.createMatriksEselon(matrix);
                                 SPL.createEselonTereduksi(matrix);
-                                OutputMatrix.tulisSolusiGaussJordan(SPL.solutionGaussJordan(matrix), matrix);
+                                s = OutputMatrix.tulisSolusiGaussJordan(SPL.solutionGauss(matrix), matrix);
                             } else if (opsiInput == 2) {
                                 Matrix matrix = InputMatrix.inputFileMatrix(scanner);
                                 SPL.createMatriksEselon(matrix);
                                 SPL.createEselonTereduksi(matrix);
-                                OutputMatrix.tulisSolusiGaussJordan(SPL.solutionGaussJordan(matrix), matrix);
+                                s =  OutputMatrix.tulisSolusiGaussJordan(SPL.solutionGauss(matrix), matrix);
                             } else if (opsiInput == 3) {
                                 Matrix matrix = InputMatrix.inputHilbert(scanner);
                                 SPL.createMatriksEselon(matrix);
                                 SPL.createEselonTereduksi(matrix);
-                                OutputMatrix.tulisSolusiGaussJordan(SPL.solutionGaussJordan(matrix), matrix);
+                                s = OutputMatrix.tulisSolusiGaussJordan(SPL.solutionGauss(matrix), matrix);
                             }
                             // Abis ini ada Info Mau dikirim hasilnya ke txt atau nggak, buat Andi
-                            System.out.println("Apakah jawaban mau disimpan?");
-                            System.out.println("1.iya");
-                            System.out.println("2.tidak");
+                            Tools.kirimOpsiSimpan();;
                             int opsiHasil = scanner.nextInt();
-
+                            // Mau input apapun(simpen dalam txt atau nggak), nanti balik ke Menu
+                            if(opsiHasil == 1)
+                            {
+                                OutputMatrix.TuliskeTxt(s);
+                            }
                             Tools.pause();
                             // Mau input apapun(simpen dalam txt atau nggak), nanti balik ke Menu
                             isMenu = true;
@@ -84,28 +87,31 @@ public class mainprogram {
                             System.out.println("2. Input File");
                             System.out.println("3. Input Matrix Hilbert");
                             int opsiInput = scanner.nextInt();
+                            String s  = "";
                             if (opsiInput == 1) {
                                 Matrix matrix = InputMatrix.inputMatrixKeyboard(scanner);
                                 SPL.createMatriksEselon(matrix);
                                 SPL.createEselonTereduksi(matrix);
-                                OutputMatrix.tulisSolusiGaussJordan(SPL.solutionGaussJordan(matrix), matrix);
+                                s = OutputMatrix.tulisSolusiGaussJordan(SPL.solutionGaussJordan(matrix), matrix);
                             } else if (opsiInput == 2) {
                                 Matrix matrix = InputMatrix.inputFileMatrix(scanner);
                                 SPL.createMatriksEselon(matrix);
                                 SPL.createEselonTereduksi(matrix);
-                                OutputMatrix.tulisSolusiGaussJordan(SPL.solutionGaussJordan(matrix), matrix);
+                                s = OutputMatrix.tulisSolusiGaussJordan(SPL.solutionGaussJordan(matrix), matrix);
                             } else if (opsiInput == 3) {
                                 Matrix matrix = InputMatrix.inputHilbert(scanner);
                                 SPL.createMatriksEselon(matrix);
                                 SPL.createEselonTereduksi(matrix);
-                                OutputMatrix.tulisSolusiGaussJordan(SPL.solutionGaussJordan(matrix), matrix);
+                                s = OutputMatrix.tulisSolusiGaussJordan(SPL.solutionGaussJordan(matrix), matrix);
                             }
                             // Abis ini ada Info Mau dikirim hasilnya ke txt atau nggak, buat Andi
-                            System.out.println("Apakah jawaban mau disimpan?");
-                            System.out.println("1.iya");
-                            System.out.println("2.tidak");
+                            Tools.kirimOpsiSimpan();;
                             int opsiHasil = scanner.nextInt();
                             // Mau input apapun(simpen dalam txt atau nggak), nanti balik ke Menu
+                            if(opsiHasil == 1)
+                            {
+                                OutputMatrix.TuliskeTxt(s);
+                            }
                             Tools.pause();
                             isMenu = true;
                         }
@@ -469,10 +475,6 @@ public class mainprogram {
                     int opsiInput = scanner.nextInt();
                     if (opsiInput == 1) {
                         InputMatrix.inputRegresiLinierKeyboard(scanner);
-                        System.out.println("Apakah jawaban mau disimpan?");
-                        System.out.println("1.iya");
-                        System.out.println("2.tidak");
-
                     } else if (opsiInput == 2) {
                         InputMatrix.inputRegresiLinierFile(scanner);
                     } else {

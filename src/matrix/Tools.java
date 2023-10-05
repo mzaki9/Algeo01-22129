@@ -16,7 +16,6 @@ public class Tools
                     double nilaiBulat = Double.parseDouble(hasil);
                     m.setElmt(i, j, nilaiBulat);
 
-                
             }
         }
         return m;

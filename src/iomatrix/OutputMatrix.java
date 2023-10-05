@@ -17,20 +17,28 @@ public class OutputMatrix {
         }
     }
 
-    public static void tulisSolusiGaussJordan(String[] ans, Matrix m) {
+    public static String tulisSolusiGaussJordan(String[] ans, Matrix m) {
+        String s = "";
         if (Tools.cekNoSolution(m) || Tools.Same1Utama(m)) {
             System.out.println("Tidak ada solusi!");
+            s+="Tidak ada solusi!";
         } else {
             System.out.println("=============SOLUSI===============");
+            s+="=============SOLUSI===============\n";
             for (int i = 0; i < ans.length; i++) {
                 if (ans[i] != "") {
                     System.out.println("X" + (i + 1) + " =" + " " + ans[i]);
+                    s+= "X" + (i + 1) + " =" + " " + ans[i] + "\n";
                 } else {
                     System.out.println("X" + (i + 1) + " = " + "R" + (i + 1) + " - isi bebas ");
+                    s += "X" + (i + 1) + " = " + "R" + (i + 1) + " - isi bebas \n";
                 }
             }
             System.out.println("===================================");
-        }
+            s+= "===================================\n";
+
+        }   
+        return s;
     }
 
     public static void tulisSolusi(Matrix x) {
