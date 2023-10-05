@@ -69,12 +69,13 @@ public class mainprogram {
                                 s = OutputMatrix.tulisSolusiGaussJordan(SPL.solutionGauss(matrix), matrix);
                             }
                             // Abis ini ada Info Mau dikirim hasilnya ke txt atau nggak, buat Andi
-                            Tools.kirimOpsiSimpan();;
+                            Tools.kirimOpsiSimpan();
                             int opsiHasil = scanner.nextInt();
                             // Mau input apapun(simpen dalam txt atau nggak), nanti balik ke Menu
                             if(opsiHasil == 1)
                             {
                                 OutputMatrix.TuliskeTxt(s);
+                                System.exit(0);
                             }
                             Tools.pause();
                             // Mau input apapun(simpen dalam txt atau nggak), nanti balik ke Menu
@@ -111,6 +112,7 @@ public class mainprogram {
                             if(opsiHasil == 1)
                             {
                                 OutputMatrix.TuliskeTxt(s);
+                                System.exit(0);
                             }
                             Tools.pause();
                             isMenu = true;
@@ -141,6 +143,7 @@ public class mainprogram {
                                     String s = "Matrix hasil splnya adalah:\n"
                                             + OutputMatrix.matrixToString(balikan);
                                     OutputMatrix.TuliskeTxt(s);
+                                    System.exit(0);
                                 }
                                 Tools.pause();
                                 isMenu = true;
@@ -178,6 +181,7 @@ public class mainprogram {
                                     String s = "Matrix hasil splnya adalah:\n"
                                             + OutputMatrix.matrixToString(cramer);
                                     OutputMatrix.TuliskeTxt(s);
+                                    System.exit(0);
                                 }
                                 Tools.pause();
                                 isMenu = true;
@@ -221,6 +225,7 @@ public class mainprogram {
                                 if (opsiHasil == 1) {
                                     String s = "Determinannya adalah: " + Kofaktor.hitungDeterminan(matrix);
                                     OutputMatrix.TuliskeTxt(s);
+                                    System.exit(0);
                                 }
                                 Tools.pause();
                                 isMenu = true;
@@ -233,6 +238,7 @@ public class mainprogram {
                                 if (opsiHasil == 1) {
                                     String s = "Determinannya adalah: " + Kofaktor.hitungDeterminan(matrix);
                                     OutputMatrix.TuliskeTxt(s);
+                                    System.exit(0);
                                 }
                                 Tools.pause();
                                 isMenu = true;
@@ -318,6 +324,7 @@ public class mainprogram {
                                         String s = "Matrix inversenya adalah:\n"
                                                 + OutputMatrix.matrixToString(MatrixBalikan.GaussJordan(matrix));
                                         OutputMatrix.TuliskeTxt(s);
+                                        System.exit(0);
                                     }
                                     Tools.pause();
                                     isMenu = true;
@@ -357,6 +364,7 @@ public class mainprogram {
                                 String s = "Matrix inversenya adalah:\n"
                                         + OutputMatrix.matrixToString(Kofaktor.InverseKofaktor(matrix));
                                 OutputMatrix.TuliskeTxt(s);
+                                System.exit(0);
                             }
                             Tools.pause();
                             isMenu = true;
@@ -395,6 +403,7 @@ public class mainprogram {
                                 String s = "Hasilnya untuk nilai x yand diuji adalah :\n"
                                         + OutputMatrix.matrixToString(hasil);
                                 OutputMatrix.TuliskeTxt(s);
+                                System.exit(0);
                             }
                             Tools.pause();
                             isMenu = true;
@@ -493,6 +502,7 @@ public class mainprogram {
                     if(opsiHasil == 1)
                     {
                         OutputMatrix.TuliskeTxt(s);
+                        System.exit(0);
                     }
                     // Mau input apapun(simpen dalam txt atau nggak), nanti balik ke Menu
                     Tools.pause();
@@ -519,8 +529,7 @@ public class mainprogram {
                     e.printStackTrace();
                 }
                 
-                Tools.pause();
-                isMenu = true;
+                System.exit(0);
             
 
             }

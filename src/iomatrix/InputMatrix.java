@@ -2,9 +2,6 @@ package iomatrix;
 
 import java.io.*;
 import java.util.Scanner;
-
-import javax.swing.JOptionPane;
-
 import matrix.*;
 
 public class InputMatrix {
@@ -282,7 +279,6 @@ public class InputMatrix {
                 reader.close();
 
             } catch (IOException e) {
-                JOptionPane.showMessageDialog(null, "Terjadi error.Klik OK dan input lagi ", "Error!", JOptionPane.ERROR_MESSAGE);
                 
                 System.out.println("\n========================================================");
                 System.out.println(" silahkan input nama file txt, ex: tes1 dari tes1.txt");

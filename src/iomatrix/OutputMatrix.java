@@ -64,7 +64,6 @@ public class OutputMatrix {
             path = file.getAbsolutePath();
         } catch (IOException e) {
             System.out.println("Terjadi error.");
-            JOptionPane.showMessageDialog(null, "Terjadi error. ", "Error!", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 reader.close();
@@ -106,10 +105,9 @@ public class OutputMatrix {
             wr.write(s);
             wr.close();
             System.out.println("Sukses menulis file.");
-            JOptionPane.showMessageDialog(null, "Sukses menulis file. ", "SUKSES", JOptionPane.PLAIN_MESSAGE);
         } catch (IOException e) {
             System.out.println("Terjadi error.");
-            JOptionPane.showMessageDialog(null, "Terjadi error. ", "Error!", JOptionPane.ERROR_MESSAGE);
+
         }
     }
 
