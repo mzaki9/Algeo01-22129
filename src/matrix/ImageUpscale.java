@@ -229,7 +229,7 @@ public class ImageUpscale {
         return Ipixel;
     }
 
-    public static void ImageUps(BufferedImage inputImage, int s, String dir) {
+    public static void ImageUps(BufferedImage inputImage, int s, String dir, String name) {
             int newWidth = s * inputImage.getWidth();
             int newHeight = s * inputImage.getHeight();
             BufferedImage interpolatedImage = new BufferedImage(newWidth, newHeight, inputImage.getType());
@@ -243,7 +243,7 @@ public class ImageUpscale {
                     interpolatedImage.setRGB(j, i, Ipixel);
                 }
                 try {
-                    ImageIO.write(interpolatedImage, "png", new File(dir+"output.png"));
+                    ImageIO.write(interpolatedImage, "png", new File(dir+"new"+ name));
                 } catch (IOException e) {
                     e.printStackTrace();
                 } 

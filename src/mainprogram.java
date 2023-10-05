@@ -538,7 +538,7 @@ public class mainprogram {
                 int s = scanner.nextInt();
                 try
                 {BufferedImage inputImage = ImageIO.read(new File(dir + name));
-                ImageUpscale.ImageUps(inputImage,s,dir);
+                ImageUpscale.ImageUps(inputImage,s,dir,name);
                 }catch(Exception e){
                     e.printStackTrace();
                 }
