@@ -61,7 +61,6 @@ public class Tools
             System.out.println("\nTekan apapun untuk melanjutkan...");
             Scanner scanner = new Scanner(System.in);
             scanner.nextLine();
-            scanner.close();
             System.out.print("\033[H\033[2J");
             System.out.flush();
     }

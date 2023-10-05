@@ -31,7 +31,6 @@ public class mainprogram {
             // Keluar Program
             if (opsiMenu == 8) {
                 System.out.println("Keluar dari program");
-                scanner.close();
                 startprogram = false;
             }
             // ===SPL=====
@@ -373,13 +372,13 @@ public class mainprogram {
                     // Opsi Input Keyboard
                     if (opsiMethod == 1) {
                         Matrix matrix = InputMatrix.inputInterpolasi(scanner);
-                        hasil = InterpolasiPolinomial.Interpolasi(matrix, false);
+                        hasil = InterpolasiPolinomial.Interpolasi(matrix, false,scanner);
                         Tools.pause();
                         isMenu = true;
                     }
                     if (opsiMethod == 2) {
                         Matrix matrix = InputMatrix.inputFileMatrix(scanner);
-                        hasil = InterpolasiPolinomial.Interpolasi(matrix, true);
+                        hasil = InterpolasiPolinomial.Interpolasi(matrix, true,scanner);
                         Tools.pause();
                         isMenu = true;
                     }

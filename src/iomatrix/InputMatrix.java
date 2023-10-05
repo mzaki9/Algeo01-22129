@@ -11,6 +11,7 @@ public class InputMatrix {
         int derajat = scanner.nextInt();
         Matrix dataXY = new Matrix(derajat + 1, 2);
 
+        System.out.println("Masukkan x y sebanyak " + derajat);
         for(int i = 0; i <= derajat; i++){
             for(int j = 0; j < 2;j++){
                 dataXY.setElmt(i, j, scanner.nextDouble());
