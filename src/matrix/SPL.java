@@ -296,18 +296,19 @@ public class SPL {
 
     public static Matrix inverseMatrix(Matrix m) {
         int n = m.getRowEff();
-
-        if (/* m.getColEff() - 1 != m.getRowEff() */ Kofaktor.hitungDeterminan(m) == 0) {
+        Matrix matrixTanpaB = new Matrix(n, n);
+        matrixTanpaB = Tools.matrixWithoutB(m);
+        if (m.getRowEff() >= m.getColEff() ||  Kofaktor.hitungDeterminan(m) == 0) {
             System.out.println("Matrix tidak valid / atau tidak memiliki solusi unik");
             return null;
         }
 
-        Matrix matrixTanpaB = new Matrix(n, n);
+
         Matrix b = Tools.extractB(m);
         Matrix hasil = new Matrix(m.getRowEff(), m.getRowEff());
         Matrix x = new Matrix(hasil.getRowEff(), 1);
 
-        matrixTanpaB = Tools.matrixWithoutB(m);
+
         hasil = MatrixBalikan.GaussJordan(matrixTanpaB);
         if (hasil != null) {
             // X = hasil^-1 * b
