@@ -13,10 +13,7 @@ public class InterpolasiPolinomial {
         Matrix augMatrix = null;
 
         if (isFile) {
-            if (m.getRowEff() - 1 != m.getColEff()) {
-                System.out.println("Matrix tidak valid !");
-                return null;
-            }
+
             Matrix temp = new Matrix(m.getRowEff() - 1, m.getColEff());
             // Isi Matrix noX
             for (int i = 0; i < temp.getRowEff(); i++) {
