@@ -39,10 +39,11 @@ public class InputMatrix {
         }
         return hilb;
     }
-    public static void inputRegresiLinierKeyboard(Scanner scanner)
+    public static String inputRegresiLinierKeyboard(Scanner scanner)
     // I.S Menerima scanner 
     // F.S Mengembalikan matriks yang sudah diolah menjadi regresi dengan input Keyboard
     {
+        String s = "";
         System.out.print("Mau berapa banyak peubah(var x)? (n) : ");
         int n = scanner.nextInt();
         System.out.print("Mau ada berapa sampel?  (m): ");
@@ -68,13 +69,16 @@ public class InputMatrix {
         // OutputMatrix.tulisMatrix(eEqualReg);
         SPL.createMatriksEselon(eEqualReg);
         SPL.createEselonTereduksi(eEqualReg);
-        OutputMatrix.tulisMatrix(eEqualReg);
+        // OutputMatrix.tulisMatrix(eEqualReg);
         if(Tools.cekSolusiBanyak(eEqualReg) || Tools.cekNoSolution(eEqualReg) || Tools.Same1Utama(eEqualReg))
         {
             System.out.println("Tidak Ada Solusi!");
+            s += "Tidak Ada Solusi!\n";
             if(Tools.cekSolusiBanyak(eEqualReg) || Tools.Same1Utama(eEqualReg))
             {
                 System.out.println("Ditemukan 1 baris 0 semua,(Solusi Banyak)");
+                s += "Ditemukan 1 baris 0 semua,(Solusi Banyak) \n";
+
             }
         }
         else
@@ -82,35 +86,44 @@ public class InputMatrix {
 
             Float[] ansTab =  RegresiLinierBerganda.tulisSolusiRegresi(SPL.solutionGaussJordan(eEqualReg), eEqualReg);
             System.out.println("Persamaan nya adalah : ");
+            s += "Persamaan nya adalah : \n";
             System.out.print("y = " + ansTab[0]);
+            s += "y = " + ansTab[0] +" \n";
             for (int i = 1; i < ansTab.length; i++) {
                 if (ansTab[i] > 0)
                 {
                     System.out.print(" + " );
+                    s+= " + \n" ;
+
                 } 
                 System.out.print(ansTab[i] + " x" + i + " ");
+                s += ansTab[i] + " x" + i + " \n";
+
                 
             }
             System.out.println("\nHampirannya berapa? ada " + n +" buah x : ");
+            s += "\nHampirannya berapa? ada " + n +" buah x : \n";
+
             float hampy = 0;
             hampy += ansTab[0];
             for (int i = 1; i <= n; i++) {
                 
                 double x = scanner.nextDouble();
+                s += "X" + i +" = " + x + "\n";
                 hampy += (x * ansTab[i]);
             }
             System.out.println("Dan Hampirannya adalah y =  " + hampy);
+            s += "Dan Hampirannya adalah y =  " + hampy + "\n";
+
         }
+    return s;
     
-
-
-
-
     }
-    public static void inputRegresiLinierFile(Scanner scanner)
+    public static String inputRegresiLinierFile(Scanner scanner)
        // I.S Menerima scanner 
     // F.S Mengembalikan matriks yang sudah diolah menjadi regresi dengan input file
     {
+        String s = "";
         Matrix matrix = inputFileMatrix(scanner);
         Matrix matriksRegresi = new Matrix(matrix.getRowEff()-1, matrix.getColEff());
         //Copy Matrix input file ke matriksRegresi untuk pengolahan
@@ -125,13 +138,16 @@ public class InputMatrix {
         // OutputMatrix.tulisMatrix(eEqualReg);
         SPL.createMatriksEselon(eEqualReg);
         SPL.createEselonTereduksi(eEqualReg);
-        OutputMatrix.tulisMatrix(eEqualReg);
+        // OutputMatrix.tulisMatrix(eEqualReg);
         if(Tools.cekSolusiBanyak(eEqualReg) || Tools.cekNoSolution(eEqualReg) || Tools.Same1Utama(eEqualReg))
         {
             System.out.println("Tidak Ada Solusi!");
+            s += "Tidak Ada Solusi!\n";
             if(Tools.cekSolusiBanyak(eEqualReg) || Tools.Same1Utama(eEqualReg))
             {
                 System.out.println("Ditemukan 1 baris 0 semua,(Solusi Banyak)");
+                s += "Ditemukan 1 baris 0 semua,(Solusi Banyak) \n";
+
             }
         }
         else
@@ -139,14 +155,19 @@ public class InputMatrix {
 
             Float[] ansTab =  RegresiLinierBerganda.tulisSolusiRegresi(SPL.solutionGaussJordan(eEqualReg), eEqualReg);
             System.out.println("Persamaan nya adalah : ");
+            s += "Persamaan nya adalah : \n";
             System.out.print("y = " + ansTab[0]);
+            s += "y = " + ansTab[0] + "\n";
             for (int i = 1; i < ansTab.length; i++) {
                 if (ansTab[i] > 0)
                 {
                     System.out.print(" + " );
+                    s+= " + \n" ;
+
                 } 
                 System.out.print(ansTab[i] + " x" + i + " ");
-                
+                s += ansTab[i] + " x" + i + " \n";
+
             }
             
             float hampy = 0;
@@ -157,7 +178,9 @@ public class InputMatrix {
                 System.out.println("X" + (i+1) + " = " + matrix.getElmt(matrix.getRowEff() - 1,i));
             }
             System.out.println("Dan Hampirannya adalah y =  " + hampy);
+            s += "Dan Hampirannya adalah y =  " + hampy + "\n";
         }
+        return s;
 
     }
 

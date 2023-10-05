@@ -473,10 +473,12 @@ public class mainprogram {
                     System.out.println("1. Keyboard");
                     System.out.println("2. Input File");
                     int opsiInput = scanner.nextInt();
+                    String s = "";
                     if (opsiInput == 1) {
-                        InputMatrix.inputRegresiLinierKeyboard(scanner);
+                        s = InputMatrix.inputRegresiLinierKeyboard(scanner);
+
                     } else if (opsiInput == 2) {
-                        InputMatrix.inputRegresiLinierFile(scanner);
+                        s = InputMatrix.inputRegresiLinierFile(scanner);
                     } else {
                         System.out.println("Input Tidak Sesuai! Balik ke menu!");
                         Tools.pause();
@@ -486,10 +488,12 @@ public class mainprogram {
                     }
 
                     // Abis ini ada Info Mau dikirim hasilnya ke txt atau nggak, buat Andi
-                    System.out.println("Apakah jawaban mau disimpan?");
-                    System.out.println("1.iya");
-                    System.out.println("2.tidak");
+                    Tools.kirimOpsiSimpan();
                     int opsiHasil = scanner.nextInt();
+                    if(opsiHasil == 1)
+                    {
+                        OutputMatrix.TuliskeTxt(s);
+                    }
                     // Mau input apapun(simpen dalam txt atau nggak), nanti balik ke Menu
                     Tools.pause();
                     isMenu = true;
