@@ -1,18 +1,16 @@
 package matrix;
 
 import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
+
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
+
 
 import javax.imageio.ImageIO;
 
 public class ImageUpscale {
-    static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-
-    public static String dir = "../test";
-    public static void pathMaker() {
+    
+    public static String pathMaker(String dir) {
         String directory = System.getProperty("user.dir");
         directory = directory.substring(directory.lastIndexOf("\\") + 1);
         if (directory.equals("bin")) {
@@ -20,6 +18,7 @@ public class ImageUpscale {
         } else {
             dir = "test\\";
         }
+        return dir;
     }
 
     public static Matrix matrixpojok(int height, int width, BufferedImage image) {
@@ -226,16 +225,7 @@ public class ImageUpscale {
         return Ipixel;
     }
 
-    public static void ImageUps() {
-        try {
-            pathMaker();
-            // Load the image
-            System.out.println("Masukkan nama file : ");
-            String name = reader.readLine();
-            BufferedImage inputImage = ImageIO.read(new File(dir + name));
-            System.out.println("Masukkan perbesaran : ");
-            String input = reader.readLine();
-            int s = Integer.parseInt(input);
+    public static void ImageUps(BufferedImage inputImage, int s, String dir) {
             int newWidth = s * inputImage.getWidth();
             int newHeight = s * inputImage.getHeight();
             BufferedImage interpolatedImage = new BufferedImage(newWidth, newHeight, inputImage.getType());
@@ -255,14 +245,6 @@ public class ImageUpscale {
                 } 
             }
             System.out.println("Image berhasil diperbesar");
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                reader.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-    }
+       
     }
 }

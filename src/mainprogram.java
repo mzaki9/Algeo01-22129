@@ -1,5 +1,8 @@
 
+import java.io.File;
 import java.util.Scanner;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
 
 import iomatrix.*;
 import matrix.*;
@@ -495,9 +498,22 @@ public class mainprogram {
             }
             // ===Pembesaran Gambar dengan Bicubic SPline=====
             else if (opsiMenu == 7) {
-                isMenu = false;
-            
-                ImageUpscale.ImageUps();
+                isMenu = false;              
+                String dir = "../test";
+                dir = ImageUpscale.pathMaker(dir);
+            // Load the image
+                System.out.println("Masukkan nama file : ");
+                String name = scanner.next();
+
+                System.out.println("Masukkan perbesaran : ");
+                int s = scanner.nextInt();
+                try
+                {BufferedImage inputImage = ImageIO.read(new File(dir + name));
+                ImageUpscale.ImageUps(inputImage,s,dir);
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
+                
                 Tools.pause();
                 isMenu = true;
             
